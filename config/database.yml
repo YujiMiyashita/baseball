@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  template: template0
+  pool: 5
+development:
+  <<: *default
+  database: baseball_development
+test:
+  <<: *default
+  database: baseball_test
+production:
+  <<: *default
+  database: baseball_production
+  username: baseball
+  password: <%= ENV['BASEBALL_DATABASE_PASSWORD'] %>
