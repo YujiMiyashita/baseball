@@ -20,15 +20,48 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'devise'
+
+gem 'omniauth'
+
+gem 'omniauth-google-oauth2'
+
+gem 'omniauth-facebook'
+
+gem 'twitter-bootstrap-rails'
+
+#画像アップローダー
+gem 'carrierwave'
+
+gem 'rmagick'
+
+#heroku logs -t
+gem 'rails_12factor', group: :production
+
+gem 'pusher'
+
+gem 'kaminari'
+
+gem 'binding_of_caller'
+
 group :development, :test do
 
   gem 'byebug'
+
+  gem 'pry-byebug'
+
+  gem 'pry-rails'
+
+  gem 'pry-doc'
 end
 
 group :development do
 
   gem 'web-console', '~> 2.0'
 
+  gem 'rubocop', require: false
 
   gem 'spring'
+
+  gem 'letter_opener_web'
 end
