@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'tribes/create'
+
+  get 'tribes/destroy'
+
   #ルート
   root 'top#index'
   #登録, ログイン画面
