@@ -1,0 +1,7 @@
+<h1>プロフィール編集</h1>
+
+<%= form_for(@profile, url: profile_path)  do |f| %>
+  <%= f.text_field :nick_name %>
+  <%= f.text_area :content %>
+  <%= f.submit %>
+<% end %>

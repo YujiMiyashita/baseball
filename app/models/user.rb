@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
 
+  has_one :profile
+
   def self.find_for_facebook(auth, sign_in_resource=nil)
     user = User.find_by(provider: auth.provider, uid: auth.uid) || User.find_by(email: auth.info.email)
 
@@ -43,11 +45,7 @@ class User < ActiveRecord::Base
   end
 
   def update_with_password(params, *options)
-    if provider.blank?
-      super
-    else
-      params.delete :current_password
-      update_without_password(params, *options)
-    end
+    params.delete :current_password
+    update_without_password(params, *options)
   end
 end
