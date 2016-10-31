@@ -2,9 +2,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
 
-  has_one :profile
-  has_many :favorites, foreign_key: 'from_user_id'
-  has_many :reverse_favorites, foreign_key: 'to_user_id', class_name: 'Favorite'
+  has_one :profile, dependent: :destroy
+  has_many :favorites, foreign_key: 'from_user_id', dependent: :destroy
+  has_many :reverse_favorites, foreign_key: 'to_user_id', class_name: 'Favorite', dependent: :destroy
   has_many :favorite_users, through: :favorites, source: :to_user
   has_many :favorited, through: :reverse_favorites, source: :from_user
 
