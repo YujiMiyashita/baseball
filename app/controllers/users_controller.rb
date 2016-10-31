@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def mypage
     @user = current_user
     if @user.profile.nil?
-      redirect_to new_profile_path, notice: 'プロフィールを投稿しましょう！'
+      redirect_to new_profile_path, notice: 'プロフィールを投稿しましょう'
     else
       render :show
     end
