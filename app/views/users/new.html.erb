@@ -5,5 +5,7 @@
   <%= f.text_field :nick_name %>
   <%= f.label :content %>
   <%= f.text_area :content %>
+  <%= f.label :team_id %>
+  <%= f.collection_select :team_id, Team.where(effective: true), :id, :name %>
   <%= f.submit %>
 <% end %>

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-
   #ルート
   root 'top#index'
+
+  #球団登録
+  resources :teams
 
   #フォローフォロワー
   resources :tribes, only: [:create, :destroy]
