@@ -9,14 +9,14 @@ Rails.application.configure do
   config.assets.digest = true
   config.log_level = :debug
   config.action_mailer.default_url_options = { host: 'stark-escarpment-59946.herokuapp.com' }
-  config.delivery_method = :smtp
-  config.smtp_settings =
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings =
   {
    user_name: ENV["SENDGRID_USERNAME"],
    password: ENV["SENDGRID_PASSWORD"],
    domain: "heroku.com",
    address: "smtp.sendgrid.net",
-   port: 465,
+   port: 587,
    authentication: :plain,
    enable_starttls_auto: true
   }
