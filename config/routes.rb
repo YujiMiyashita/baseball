@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   #ルート
   root 'top#index'
+
+  #フォローフォロワー
+  resources :tribes, only: [:create, :destroy]
+
   #登録, ログイン画面
   devise_for :users, controllers: {
     registrations: 'users/registrations',
