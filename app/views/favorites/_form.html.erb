@@ -1,0 +1,7 @@
+<% unless user == current_user %>
+  <% if current_user.favorite?(user) %>
+    <%= render partial: 'favorites/unfavorite_form', locals: { user: user } %>
+  <% else %>
+    <%= render partial: 'favorites/favorite_form', locals: { user: user } %>
+  <% end %>
+<% end %>

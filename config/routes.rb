@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     get :mypage, on: :collection
   end
 
+  #お気に入り
+  resources :favorites, only: [:create, :destroy]
+
   #letter_opener
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

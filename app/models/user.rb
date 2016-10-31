@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
 
   has_one :profile
+  has_many :favorites, foreign_key: 'from_user_id'
+  has_many :reverse_favorites, foreign_key: 'to_user_id', class_name: 'Favorite'
+  has_many :favorite_users, through: :favorites, source: :to_user
+  has_many :favorited, through: :reverse_favorites, source: :from_user
 
   def self.find_for_facebook(auth, sign_in_resource=nil)
     user = User.find_by(provider: auth.provider, uid: auth.uid) || User.find_by(email: auth.info.email)
@@ -38,6 +42,10 @@ class User < ActiveRecord::Base
       user.save(validate: false)
     end
     user
+  end
+
+  def favorite?(user)
+    favorites.find_by(to_user_id: user.id)
   end
 
   def self.create_string
