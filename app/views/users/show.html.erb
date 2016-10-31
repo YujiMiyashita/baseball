@@ -1,0 +1,5 @@
+<h1>ユーザ詳細画面</h1>
+<p>ニックネーム：<%= @user.profile.nick_name %></p>
+<p>プロフィール：<%= @user.profile.content %></p>
+
+<%= link_to 'プロフィール編集', edit_profile_path if @user == current_user %>

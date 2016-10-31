@@ -1,0 +1,7 @@
+<h1>Users#index</h1>
+<% @users.each do |user| %>
+  <div class="field">
+    <%= user.user_name %>
+    <%= link_to 'プロフィール', user_path(user) %>
+  </div>
+<% end %>
