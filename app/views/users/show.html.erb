@@ -1,5 +1,9 @@
 <h1>ユーザ詳細画面</h1>
-<p>ニックネーム：<%= @user.profile.nick_name %></p>
-<p>プロフィール：<%= @user.profile.content %></p>
+
+<% if @user.profile.present? %>
+  <%= render partial: 'profile_field', locals: { user: @user } %>
+<% else %>
+  <p>プロフィールがまだ登録されていません</p>
+<% end %>
 
 <%= link_to 'プロフィール編集', edit_profile_path if @user == current_user %>

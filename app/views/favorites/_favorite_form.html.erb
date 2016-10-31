@@ -1,0 +1,4 @@
+<%= form_for(current_user.favorites.build(to_user_id: user.id)) do |f| %>
+  <%= f.hidden_field :to_user_id %>
+  <%= f.submit '☆' %>
+<% end %>

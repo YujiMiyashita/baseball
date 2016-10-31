@@ -3,5 +3,6 @@
   <div class="field">
     <%= user.user_name %>
     <%= link_to 'プロフィール', user_path(user) %>
+    <%= render partial: 'favorites/form', locals: { user: user } %>
   </div>
 <% end %>
