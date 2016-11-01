@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101034715) do
+ActiveRecord::Schema.define(version: 20161101051342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,25 @@ ActiveRecord::Schema.define(version: 20161101034715) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "tickets", force: :cascade do |t|
+    t.datetime "playball"
+    t.integer  "user_id"
+    t.integer  "ballpark_id"
+    t.integer  "visitor_id"
+    t.integer  "home_id"
+    t.integer  "number"
+    t.integer  "price"
+    t.datetime "post_start_at"
+    t.datetime "post_end_at"
+    t.boolean  "status",        default: false
+    t.boolean  "format",        default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "tickets", ["ballpark_id"], name: "index_tickets_on_ballpark_id", using: :btree
+  add_index "tickets", ["user_id"], name: "index_tickets_on_user_id", using: :btree
+
   create_table "tribes", force: :cascade do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
@@ -100,4 +119,6 @@ ActiveRecord::Schema.define(version: 20161101034715) do
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
   add_foreign_key "profiles", "users"
+  add_foreign_key "tickets", "ballparks"
+  add_foreign_key "tickets", "users"
 end

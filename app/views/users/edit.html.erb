@@ -8,6 +8,6 @@
   <%= f.label :team_id %>
   <%= f.collection_select :team_id, Team.where(effective: true), :id, :name %>
   <%= f.label :ballpark_id %>
-  <%= f.collection_select :team_id, Ballpark.where(effective: true), :id, :name %>
+  <%= f.collection_select :ballpark_id, Ballpark.where(effective: true), :id, :name %>
   <%= f.submit %>
 <% end %>

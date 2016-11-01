@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  playball: 2016-11-01 14:13:42
+  user_id: 
+  ballpark_id: 
+  visitor_id: 1
+  home_id: 1
+  number: 1
+  posted_at: 2016-11-01 14:13:42
+  post_end_at: 2016-11-01 14:13:42
+  status: false
+  format: false
+
+two:
+  playball: 2016-11-01 14:13:42
+  user_id: 
+  ballpark_id: 
+  visitor_id: 1
+  home_id: 1
+  number: 1
+  posted_at: 2016-11-01 14:13:42
+  post_end_at: 2016-11-01 14:13:42
+  status: false
+  format: false
