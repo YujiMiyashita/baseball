@@ -55,6 +55,10 @@ class User < ActiveRecord::Base
     favorites.find_by(to_user_id: user.id)
   end
 
+  def follow?(user)
+    tribes.find_by(followed_id: user.id)
+  end
+
   def self.create_string
     SecureRandom.uuid
   end

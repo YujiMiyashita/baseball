@@ -1,0 +1,7 @@
+<% unless user == current_user %>
+  <% if current_user.follow?(user) %>
+    <%= render partial: 'tribes/unfollow_form', locals: { user: user } %>
+  <% else %>
+    <%= render partial: 'tribes/follow_form', locals: { user: user } %>
+  <% end %>
+<% end %>
