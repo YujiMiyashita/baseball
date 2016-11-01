@@ -54,6 +54,6 @@ class UsersController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:nick_name, :content, :back_image, :team_id)
+    params.require(:profile).permit(:nick_name, :content, :back_image, :team_id, :ballpark_id, :player_id)
   end
 end
