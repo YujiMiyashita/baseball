@@ -8,6 +8,8 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :back_image
       t.integer :team_id, index: true
       t.integer :player_id, index: true
+      t.integer :ballpark_id, index: true
+
       t.timestamps null: false
     end
   end

@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031133959) do
+ActiveRecord::Schema.define(version: 20161101034715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ballparks", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "effective",  default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "from_user_id"
@@ -35,10 +42,12 @@ ActiveRecord::Schema.define(version: 20161031133959) do
     t.string   "back_image"
     t.integer  "team_id"
     t.integer  "player_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "ballpark_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
+  add_index "profiles", ["ballpark_id"], name: "index_profiles_on_ballpark_id", using: :btree
   add_index "profiles", ["player_id"], name: "index_profiles_on_player_id", using: :btree
   add_index "profiles", ["team_id"], name: "index_profiles_on_team_id", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
