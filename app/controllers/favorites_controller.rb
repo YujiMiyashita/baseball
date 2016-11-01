@@ -1,4 +1,6 @@
 class FavoritesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @favorite = current_user.favorites.create(to_user_id: params[:favorite][:to_user_id])
     redirect_to users_url, notice: "#{@favorite.to_user.user_name}さんをお気に入り登録しました"
