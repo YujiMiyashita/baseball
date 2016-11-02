@@ -1,6 +1,6 @@
-<h1>Tickes#index</h1>
+<h1>チケット一覧</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>PLAYBALL</th>
@@ -20,14 +20,9 @@
         <td><%= ticket.home.name %> vs <%= ticket.visitor.name %></td>
         <td><%= ticket.number %>枚</td>
         <td><%= ticket.price %>円/枚</td>
-        <td><%= ticket.user.profile.nick_name %></td>
-        <td><%= <%= ticket.post_end_at.strftime("%Y年%m月%d日 %H時%M分")まで %></td>
+        <td><%= link_to ticket.user.profile.nick_name, user_path(ticket.user) %></td>
+        <td><%= ticket.post_end_at.strftime("%Y年%m月%d日 %H時%M分") %>まで</td>
         <td><%= link_to 'Show', ticket %></td>
-
-        <% if ticket.user == current_user %>
-          <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-          <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        
       </tr>
     <% end %>
   </tbody>

@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :my_ticket, only: [:edit, :update, :destroy]
 
   def index
     @tickets = Ticket.where(status: true)
@@ -43,6 +44,9 @@ class TicketsController < ApplicationController
 
   def set_ticket
     @ticket = Ticket.find(params[:id])
+  end
+
+  def my_ticket
     redirect_to tickets_url unless @ticket.user == current_user
   end
 
