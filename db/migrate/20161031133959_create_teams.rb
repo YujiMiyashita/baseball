@@ -2,7 +2,7 @@ class CreateTeams < ActiveRecord::Migration
   def change
     create_table :teams do |t|
       t.string :name
-      t.boolean :effective, default: true
+      t.boolean :status, default: false
 
       t.timestamps null: false
     end

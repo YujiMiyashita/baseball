@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     get :mypage, on: :collection
   end
 
+  resources :tickets
+
   #お気に入り
   resources :favorites, only: [:create, :destroy]
 
