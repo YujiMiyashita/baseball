@@ -3,5 +3,5 @@
 <%= render partial: 'ticket_detail', locals: { ticket: @ticket } %>
 
 <%= form_for(@ticket, url: registration_ticket_path) do |f| %>
-  <%= f.submit '本登録する' %>
+  <%= f.submit '本登録する', class: 'btn btn-success' %>
 <% end %>

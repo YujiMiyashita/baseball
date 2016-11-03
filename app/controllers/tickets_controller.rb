@@ -1,5 +1,6 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  before_action :profile_present, except: [:index]
 
   def index
     @tickets = Ticket.where(status: true)
@@ -68,6 +69,11 @@ class TicketsController < ApplicationController
   end
 
   private
+
+  def profile_present
+    profile = current_user.profile
+    redirect_to new_profile_path, notice: 'まずはプロフィールを登録しましょう' if profile.nil?
+  end
 
   def ticket_params
     params.require(:ticket).permit(:playball, :ballpark_id, :visitor_id, :home_id, :number, :post_start_at, :post_end_at, :format, :price)

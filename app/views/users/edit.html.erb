@@ -1,13 +1,29 @@
 <h1>プロフィール編集</h1>
 
 <%= form_for(@profile, url: profile_path)  do |f| %>
-  <%= f.label :nick_name %>
-  <%= f.text_field :nick_name %>
-  <%= f.label :content %>
-  <%= f.text_area :content %>
-  <%= f.label :team_id %>
-  <%= f.collection_select :team_id, Team.where(status: true), :id, :name %>
-  <%= f.label :ballpark_id %>
-  <%= f.collection_select :ballpark_id, Ballpark.where(status: true), :id, :name %>
-  <%= f.submit %>
+
+  <div class="col-xs-8">
+    <%= f.label :nick_name %>
+    <%= f.text_field :nick_name, class: 'form-control' %>
+  </div>
+
+  <div class="field col-xs-8">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'form-control' %>
+  </div>
+
+  <div class="field col-xs-8">
+    <%= f.label :team_id %>
+    <%= f.collection_select :team_id, Team.where(status: true), :id, :name, {}, { class: "form-control" } %>
+  </div>
+
+  <div class="field col-xs-8">
+    <%= f.label :ballpark_id %>
+    <%= f.collection_select :ballpark_id, Ballpark.where(status: true), :id, :name, {}, { class: "form-control" } %>
+  </div>
+
+  <div class="field col-xs-8">
+    <%= f.submit '登録する', class: 'btn btn-success' %>
+  </div>
+
 <% end %>

@@ -30,6 +30,10 @@ gem 'omniauth-facebook'
 
 gem 'twitter-bootstrap-rails'
 
+gem 'momentjs-rails', '>= 2.9.0'
+
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
+
 #画像アップローダー
 gem 'carrierwave'
 
