@@ -1,3 +1,54 @@
 <h1>チケット登録</h1>
 
-<%= render 'form' %>
+<%= form_for(@ticket, url: draft_create_tickets_path) do |f| %>
+
+  <div class="field">
+    <%= f.label :playball %>
+    <%= f.date_field :playball %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ballpark_id %>
+    <%= f.collection_select :ballpark_id, Ballpark.where(status: true), :id, :name %>
+  </div>
+
+  <div class="field">
+  <%= f.label :home_id %>
+  <%= f.collection_select :visitor_id, Team.where(status: true), :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :visitor_id %>
+    <%= f.collection_select :home_id, Team.where(status: true), :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :number %>
+    <%= f.number_field :number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.number_field :price %> 円/枚
+  </div>
+
+  <div class="field">
+    <%= f.label :post_start_at %>
+    <%= f.datetime_select :post_start_at %>
+  </div>
+
+  <div class="field">
+    <%= f.label :post_end_at %>
+    <%= f.datetime_select :post_end_at %>
+  </div>
+
+  <div class="field">
+    <%= f.label :format %>
+    <%= f.radio_button :format, true %> 勧誘
+    <%= f.radio_button :format, false %> 転売
+  </div>
+
+  <div class="action">
+    <%= f.submit %>
+  </div>
+<% end %>

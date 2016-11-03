@@ -1,0 +1,7 @@
+<h1>チケット下書き</h1>
+
+<%= render partial: 'ticket_detail', locals: { ticket: @ticket } %>
+
+<%= form_for(@ticket, url: registration_ticket_path) do |f| %>
+  <%= f.submit '本登録する' %>
+<% end %>

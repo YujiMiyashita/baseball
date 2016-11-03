@@ -20,7 +20,12 @@ Rails.application.routes.draw do
     get :mypage, on: :collection
   end
 
-  resources :tickets
+  resources :tickets, except: [:create] do
+    get :draft_index, on: :collection
+    get :draft, on: :member
+    post :draft_create, on: :collection
+    patch :registration, on: :member
+  end
 
   #お気に入り
   resources :favorites, only: [:create, :destroy]
