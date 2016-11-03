@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20161101051342) do
 
   create_table "ballparks", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "effective",  default: true
+    t.boolean  "status",     default: true
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20161101051342) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "effective",  default: true
+    t.boolean  "status",     default: true
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20161101051342) do
     t.string   "encrypted_password",     default: "",           null: false
     t.string   "user_name",              default: "（変更してください）", null: false
     t.string   "avatar"
+    t.string   "image_url"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

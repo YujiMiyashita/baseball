@@ -7,17 +7,17 @@
 
   <div class="field">
     <%= f.label :ballpark_id %>
-    <%= f.collection_select :ballpark_id, Ballpark.where(effective: true), :id, :name %>
+    <%= f.collection_select :ballpark_id, Ballpark.where(status: true), :id, :name %>
   </div>
 
   <div class="field">
   <%= f.label :home_id %>
-  <%= f.collection_select :visitor_id, Team.where(effective: true), :id, :name %>
+  <%= f.collection_select :visitor_id, Team.where(status: true), :id, :name %>
   </div>
 
   <div class="field">
     <%= f.label :visitor_id %>
-    <%= f.collection_select :home_id, Team.where(effective: true), :id, :name %>
+    <%= f.collection_select :home_id, Team.where(status: true), :id, :name %>
   </div>
 
   <div class="field">
@@ -38,12 +38,6 @@
   <div class="field">
     <%= f.label :post_end_at %>
     <%= f.datetime_select :post_end_at %>
-  </div>
-
-  <div class="field">
-    <%= f.label :status %>
-    <%= f.radio_button :status, true %> 本登録
-    <%= f.radio_button :status, false %> 下書き登録
   </div>
 
   <div class="field">

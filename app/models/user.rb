@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
 
+  mount_uploader :avatar, AvatarUploader
+
   #プロフィール
   has_one :profile, dependent: :destroy
   #お気に入り
@@ -24,7 +26,7 @@ class User < ActiveRecord::Base
         provider:  auth.provider,
         uid:       auth.uid,
         email:     auth.info.email,
-        avatar:    auth.info.image,
+        image_url:    auth.info.image,
         password:  Devise.friendly_token[0, 20]
       )
       user.skip_confirmation!
@@ -42,7 +44,7 @@ class User < ActiveRecord::Base
           provider:  auth.provider,
           uid:       auth.uid,
           email:     auth.info.email,
-          avatar: auth.info.image,
+          image_url: auth.info.image,
           password:  Devise.friendly_token[0, 20]
       )
       user.skip_confirmation!

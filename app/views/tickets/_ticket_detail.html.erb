@@ -3,7 +3,3 @@
 <p><%= ticket.number %>枚</p>
 <p>価格：<%= ticket.price %>円/枚</p>
 <p>掲載期間：<%= ticket.post_start_at %>〜<%= ticket.post_end_at %></p>
-<% if ticket.user == current_user %>
-  <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-  <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
