@@ -61,10 +61,6 @@ class User < ActiveRecord::Base
     tribes.find_by(followed_id: user.id)
   end
 
-  def self.create_string
-    SecureRandom.uuid
-  end
-
   def update_with_password(params, *options)
     params.delete :current_password
     update_without_password(params, *options)
