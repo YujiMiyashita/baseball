@@ -5,7 +5,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       t.string :user_name, null: false, default: "（変更してください）"
-      t.string :avatar
       t.string :image_url
 
       ## Recoverable
@@ -29,8 +28,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :unconfirmed_email # Only if using reconfirmable
 
       ## OmniAuthable
-      t.string :users, :provider
-      t.string :users, :uid
+      t.string :provider
+      t.string :uid
 
       t.timestamps null: false
     end

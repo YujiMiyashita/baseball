@@ -2,8 +2,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
 
-  mount_uploader :avatar, AvatarUploader
-
   #プロフィール
   has_one :profile, dependent: :destroy
   #お気に入り
@@ -27,10 +25,11 @@ class User < ActiveRecord::Base
         uid:       auth.uid,
         email:     auth.info.email,
         image_url:    auth.info.image,
-        password:  Devise.friendly_token[0, 20]
-      )
+        password:  Devise.friendly_token[0, 20])
+
       user.skip_confirmation!
       user.save(validate: false)
+      User.build_profile(user)
     end
     user
   end
@@ -44,13 +43,25 @@ class User < ActiveRecord::Base
           provider:  auth.provider,
           uid:       auth.uid,
           email:     auth.info.email,
-          image_url: auth.info.image,
-          password:  Devise.friendly_token[0, 20]
-      )
+          image_url:    auth.info.image,
+          password:  Devise.friendly_token[0, 20])
+
       user.skip_confirmation!
       user.save(validate: false)
+      User.build_profile(user)
     end
     user
+  end
+
+  def self.build_profile(user)
+    profile = Profile.new(
+      nick_name: user.user_name,
+      user_id:   user.id,
+      image_url: user.image_url,
+      ballpark_id: 1,
+      team_id: 1)
+
+    profile.save
   end
 
   def favorite?(user)
@@ -59,6 +70,10 @@ class User < ActiveRecord::Base
 
   def follow?(user)
     tribes.find_by(followed_id: user.id)
+  end
+
+  def self.create_string
+    SecureRandom.uuid
   end
 
   def update_with_password(params, *options)

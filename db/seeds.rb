@@ -1,7 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+teams = ['未選択', '広島東洋カープ', '読売ジャイアンツ', '横浜DeNAベイスターズ', '東京ヤクルトスワローズ', '阪神タイガース', '中日ドラゴンズ',
+              '北海道日本ハムファイターズ', '福岡ソフトバンクホークス', '千葉ロッテマリーンズ', '東北楽天ゴールデンイーグルス', '埼玉西武ライオンズ', 'オリックスバファローズ']
+
+ballparks = ['未選択', 'マツダスタジアム', '東京ドーム', '横浜スタジアム', '神宮球場', '甲子園球場', 'ナゴヤドーム',
+              '札幌ドーム', 'ヤフオクドーム', 'QVCマリンフィールド', 'コボスタ宮城', '西武プリンスドーム', '京セラドーム大阪']
+
+teams.each do |team|
+  Team.create(name: team)
+end
+
+ballparks.each do |ballpark|
+  Ballpark.create(name: ballpark)
+end

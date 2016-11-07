@@ -22,6 +22,12 @@
     <%= f.collection_select :ballpark_id, Ballpark.where(status: true), :id, :name, {}, { class: "form-control" } %>
   </div>
 
+  <div class="col-xs-8">
+    <%= profile_img(@profile) if profile_img(@profile) %>
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+  </div>
+
   <div class="field col-xs-8">
     <%= f.submit '登録する', class: 'btn btn-success' %>
   </div>

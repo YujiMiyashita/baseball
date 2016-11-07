@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20161101051342) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "avatar"
+    t.string   "image_url"
     t.integer  "user_id"
     t.text     "content"
     t.string   "nick_name"
@@ -93,7 +94,6 @@ ActiveRecord::Schema.define(version: 20161101051342) do
     t.string   "email",                  default: "",           null: false
     t.string   "encrypted_password",     default: "",           null: false
     t.string   "user_name",              default: "（変更してください）", null: false
-    t.string   "avatar"
     t.string   "image_url"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(version: 20161101051342) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "users"
     t.string   "provider"
     t.string   "uid"
     t.datetime "created_at",                                    null: false

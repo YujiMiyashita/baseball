@@ -3,4 +3,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     hash[:uid] = User.create_string
     super
   end
+
+  def create
+    super
+    User.build_profile(resource)
+  end
 end
