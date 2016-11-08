@@ -1,4 +1,5 @@
 <ul class="header_ul">
+  <li class="header_list"><%= link_to 'トップに戻る', root_path %></li>
   <li class="header_list"><%= link_to 'チケット一覧', tickets_path %></li>
   <% if current_user.present? %>
     <li class="header_list"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
