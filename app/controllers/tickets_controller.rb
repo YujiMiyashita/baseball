@@ -1,8 +1,11 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :set_draft_ticket, only: [:draft, :draft_edit]
+  before_action :my_ticket, only: [:draft, :edit, :draft_edit, :update, :destroy]
 
   def index
-    @tickets = Ticket.where(status: true)
+    @tickets = Ticket.where(status: true).order(created_at: :desc)
   end
 
   def draft_index
@@ -10,12 +13,10 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @ticket = Ticket.find_by(id: params[:id], status: true)
     redirect_to draft_ticket_path(params[:id]) if @ticket.nil?
   end
 
   def draft
-    @ticket = Ticket.find_by(id: params[:id], status: false, user_id: current_user.id)
   end
 
   def new
@@ -23,22 +24,17 @@ class TicketsController < ApplicationController
   end
 
   def edit
-    @ticket = Ticket.find(params[:id])
-    redirect_to tickets_url unless @ticket.user == current_user
   end
 
   def draft_edit
-    @ticket = Ticket.find_by(id: params[:id], status: false)
   end
 
   def registration
     if params[:commit] == '下書きに登録する'
-      @ticket = Ticket.find(params[:id])
-      @ticket.status = false
-      @ticket.update(ticket_params)
+      Ticket.update(params[:id], status: false)
       redirect_to draft_index_tickets_url, notice: 'チケットを下書き一覧に登録しました'
     else
-      @ticket = Ticket.update(params[:id], status: true)
+      Ticket.update(params[:id], status: true)
       redirect_to tickets_url, notice: 'チケットを本登録しました'
     end
   end
@@ -55,18 +51,24 @@ class TicketsController < ApplicationController
   end
 
   def update
-    @ticket = Ticket.find(params[:id])
-    redirect_to tickets_url unless @ticket.user == current_user
-    if @ticket.update(ticket_params)
-      redirect_to @ticket, notice: 'チケットを更新しました'
+
+    if params[:commit] == '下書き保存する'
+      if @ticket.update(ticket_params)
+        redirect_to draft_ticket_url(@ticket), notice: '下書きチケットを更新しました'
+      else
+        render :draft_edit
+      end
+
     else
-      render :edit
+      if @ticket.update(ticket_params)
+        redirect_to @ticket, notice: 'チケットを更新しました'
+      else
+        render :edit
+      end
     end
   end
 
   def destroy
-    @ticket = Ticket.find(params[:id])
-    redirect_to tickets_url unless @ticket.user == current_user
     @ticket.destroy
     redirect_to tickets_url, notice: 'チケットを削除しました'
   end
@@ -74,7 +76,15 @@ class TicketsController < ApplicationController
   private
 
   def set_ticket
+    @ticket = Ticket.find(params[:id])
+  end
 
+  def my_ticket
+    redirect_to tickets_url unless @ticket.user == current_user
+  end
+
+  def set_draft_ticket
+    @ticket = Ticket.find_by(id: params[:id], status: false, user_id: current_user.id)
   end
 
   def ticket_params
