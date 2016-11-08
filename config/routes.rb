@@ -31,8 +31,10 @@ Rails.application.routes.draw do
       get :draft_edit
       patch :registration
     end
-
   end
+
+  #観戦日記
+  resources :blogs
 
   #お気に入り
   resources :favorites, only: [:create, :destroy]

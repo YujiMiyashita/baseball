@@ -1,0 +1,23 @@
+<div class="col-xs-10 col-xs-offset-1">
+  <h2><%= @blog.title %></h2>
+
+  <div class="col-xs-8">
+    <%= simple_format(@blog.content) %>
+  </div>
+
+  <div class="col-xs-8">
+    <strong>投稿者:</strong> <%= @blog.user.profile.nick_name %>
+  </div>
+
+  <div class="col-xs-8">
+    <%= image_tag(@blog.image, width: 300, height: 200) %>
+  </div>
+
+  <div class="col-xs-8">
+    <% if @blog.user == current_user %>
+      <%= link_to '日記を編集する', edit_blog_path(@blog), class: 'btn btn-info' %>
+      <%= link_to '日記を削除する', @blog, method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-danger' %>
+    <% end %>
+    <%= link_to '一覧へ戻る', blogs_path, class: 'btn btn-default' %>
+  </div>
+</div>
