@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101051342) do
+ActiveRecord::Schema.define(version: 20161108084122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,16 @@ ActiveRecord::Schema.define(version: 20161101051342) do
   add_index "profiles", ["player_id"], name: "index_profiles_on_player_id", using: :btree
   add_index "profiles", ["team_id"], name: "index_profiles_on_team_id", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
+  create_table "seats", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "price"
+    t.integer  "ballpark_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "seats", ["ballpark_id"], name: "index_seats_on_ballpark_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
@@ -95,6 +105,7 @@ ActiveRecord::Schema.define(version: 20161101051342) do
     t.string   "encrypted_password",     default: "",           null: false
     t.string   "user_name",              default: "（変更してください）", null: false
     t.string   "image_url"
+    t.integer  "status",                 default: 0
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -119,6 +130,7 @@ ActiveRecord::Schema.define(version: 20161101051342) do
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
   add_foreign_key "profiles", "users"
+  add_foreign_key "seats", "ballparks"
   add_foreign_key "tickets", "ballparks"
   add_foreign_key "tickets", "users"
 end

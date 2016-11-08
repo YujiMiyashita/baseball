@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :followed_users, through: :tribes, source: :followed
   has_many :followers, through: :reverse_tribes, source: :follower
 
+  enum status: { general: 0, admin: 1 }
+
   def self.find_for_facebook(auth, sign_in_resource=nil)
     user = User.find_by(provider: auth.provider, uid: auth.uid) || User.find_by(email: auth.info.email)
 
