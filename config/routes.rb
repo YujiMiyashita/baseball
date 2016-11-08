@@ -21,10 +21,17 @@ Rails.application.routes.draw do
   end
 
   resources :tickets, except: [:create] do
-    get :draft_index, on: :collection
-    get :draft, on: :member
-    post :draft_create, on: :collection
-    patch :registration, on: :member
+    collection do
+      get :draft_index
+      post :draft_create
+    end
+
+    member do
+      get :draft
+      get :draft_edit
+      patch :registration
+    end
+
   end
 
   #お気に入り

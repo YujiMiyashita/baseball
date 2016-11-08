@@ -6,7 +6,7 @@ class TicketsController < ApplicationController
   end
 
   def draft_index
-    @tickets = Ticket.where(status: false, user_id: current_user.id)
+    @tickets = Ticket.where(status: false, user_id: current_user.id).order(updated_at: :desc)
   end
 
   def show
@@ -27,14 +27,19 @@ class TicketsController < ApplicationController
     redirect_to tickets_url unless @ticket.user == current_user
   end
 
-  def registration
-    @ticket = Ticket.find(params[:id])
-    @ticket.status = true
+  def draft_edit
+    @ticket = Ticket.find_by(id: params[:id], status: false)
+  end
 
-    if @ticket.save
-      redirect_to tickets_url, notice: 'チケットを本登録しました'
+  def registration
+    if params[:commit] == '下書きに登録する'
+      @ticket = Ticket.find(params[:id])
+      @ticket.status = false
+      @ticket.update(ticket_params)
+      redirect_to draft_index_tickets_url, notice: 'チケットを下書き一覧に登録しました'
     else
-      render :draft
+      @ticket = Ticket.update(params[:id], status: true)
+      redirect_to tickets_url, notice: 'チケットを本登録しました'
     end
   end
 
@@ -67,6 +72,10 @@ class TicketsController < ApplicationController
   end
 
   private
+
+  def set_ticket
+
+  end
 
   def ticket_params
     params.require(:ticket).permit(:playball, :ballpark_id, :visitor_id, :home_id, :number, :post_start_at, :post_end_at, :format, :price)

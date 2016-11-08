@@ -1,7 +1,11 @@
 <h1>チケット下書き</h1>
 
-<%= render partial: 'ticket_detail', locals: { ticket: @ticket } %>
+<div class="col-xs-10 col-xs-offset-1">
+  <%= render partial: 'ticket_detail', locals: { ticket: @ticket } %>
 
-<%= form_for(@ticket, url: registration_ticket_path) do |f| %>
-  <%= f.submit '本登録する', class: 'btn btn-success' %>
-<% end %>
+  <%= form_for(@ticket, url: registration_ticket_path) do |f| %>
+    <%= f.submit '本登録する', class: 'btn btn-success' %>
+  <% end %>
+
+  <%= link_to '編集する', draft_edit_ticket_path(@ticket), class: 'btn btn-default' %>
+</div>

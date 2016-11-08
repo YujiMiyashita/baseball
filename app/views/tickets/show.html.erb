@@ -1,8 +1,11 @@
-<h1>詳細画面</h1>
+<div class="col-xs-10 col-xs-offset-1">
+  <h1>詳細画面</h1>
+  <%= render partial: 'ticket_detail', locals: { ticket: @ticket } %>
 
-<%= render partial: 'ticket_detail', locals: { ticket: @ticket } %>
-
-<% if @ticket.user == current_user %>
-  <td><%= link_to 'Edit', edit_ticket_path(@ticket) %></td>
-  <td><%= link_to 'Destroy', @ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
+  <% if @ticket.user == current_user %>
+    <p><%= link_to '編集する', edit_ticket_path(@ticket), class: 'btn btn-info' %>
+    <%= link_to '削除する', @ticket, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <%= render partial: 'tickets/draft_button',　locals: { ticket: @ticket } %>
+    <p><%= link_to 'チケット一覧', tickets_path, class: 'btn btn-default' %></p>
+  <% end %>
+</div>
