@@ -18,12 +18,8 @@
   <% end %>
 
   <div class="col-xs-8">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+    <%= f.label :password %> <i>(変えない場合は空欄でOK)</i><br />
+    <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "パスワードは6文字以上で設定してください" %>
   </div>
 
   <div class="col-xs-8">
@@ -37,6 +33,6 @@
 <% end %>
 
 <div class="col-xs-12">
-  <h3>Cancel my account</h3>
-    Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %>
+  <h3>アカウントを削除する</h3>
+    退会しますか？ <%= button_to "退会する", registration_path(resource_name), data: { confirm: "本当によろしいですか？" }, method: :delete, class: 'btn btn-danger' %>
 </div>
