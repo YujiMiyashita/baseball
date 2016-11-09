@@ -23,6 +23,7 @@
   </div>
 
   <div class="col-xs-8">
+    <%= f.label :image_url %><br>
     <%= profile_img(@profile) if profile_img(@profile) %>
     <%= f.file_field :avatar %>
     <%= f.hidden_field :avatar_cache %>
