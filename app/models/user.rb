@@ -15,6 +15,13 @@ class User < ActiveRecord::Base
   has_many :followed_users, through: :tribes, source: :followed
   has_many :followers, through: :reverse_tribes, source: :follower
 
+  #グループトーク
+  has_many :group_talk_members
+  has_many :group_talks, through: :talk_members
+  #個人トーク
+  has_many :personal_talk_members
+  has_many :personal_talks, through: :personal_talk_members
+
   enum status: { general: 0, admin: 1 }
 
   def self.find_for_facebook(auth, sign_in_resource=nil)
