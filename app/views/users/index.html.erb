@@ -6,5 +6,6 @@
     <%= link_to 'プロフィール', user_path(user) %>
     <%= render partial: 'favorites/form', locals: { user: user } %>
     <%= render partial: 'tribes/form', locals: { user: user } %>
+    <%= render partial: 'personal_talk_members/new', locals: { user: user } %>
   </div>
 <% end %>
