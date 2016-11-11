@@ -1,0 +1,2 @@
+module PersonalTalksHelper
+end
