@@ -36,6 +36,11 @@ Rails.application.routes.draw do
   #観戦日記
   resources :blogs
 
+  #トーク機能
+  resources :personal_talks
+
+  resources :personal_talk_members
+
   #お気に入り
   resources :favorites, only: [:create, :destroy]
 
