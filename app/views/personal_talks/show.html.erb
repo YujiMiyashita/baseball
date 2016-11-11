@@ -1,0 +1,6 @@
+<h1><%= @personal_talk.users[0].profile.nick_name %>さんと<%= @personal_talk.users[1].profile.nick_name %>さんのトーク</h1>
+
+<% @personal_talk.personal_talk_messages.each do |message| %>
+  <p><%= message.user.profile.nick_name %></p>
+  <p><%= message.content %></p>
+<% end %>
