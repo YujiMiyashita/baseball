@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   has_many :personal_talk_members
   has_many :personal_talks, through: :personal_talk_members
 
+  has_many :personal_talk_messages
+
   enum status: { general: 0, admin: 1 }
 
   def self.find_for_facebook(auth, sign_in_resource=nil)

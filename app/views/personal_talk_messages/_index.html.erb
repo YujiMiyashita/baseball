@@ -1,0 +1,11 @@
+<% @messages.each do |message| %>
+  <% if message.user == current_user %>
+    <div class="col-xs-6 col-xs-offset-6">
+  <% else %>
+    <div class="col-xs-7">
+  <% end %>
+    <p><%= simple_format(message.content) %></p>
+    <p><%= message.user.profile.nick_name if message.user.present? %>
+       <%= message.created_at.strftime("%p %H:%M") %></p>
+    </div>
+<% end %>
