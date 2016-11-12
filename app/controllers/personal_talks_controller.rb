@@ -5,5 +5,7 @@ class PersonalTalksController < ApplicationController
 
   def show
     @personal_talk = current_user.personal_talks.find(params[:id])
+    @messages = @personal_talk.personal_talk_messages.order(created_at: :asc)
+    @message = @personal_talk.personal_talk_messages.build
   end
 end
