@@ -1,4 +1,5 @@
 class PersonalTalkMessagesController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     @message = PersonalTalkMessage.new(personal_talk_message_params)

@@ -1,4 +1,6 @@
 class PersonalTalksController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @personal_talks = current_user.personal_talks
   end
