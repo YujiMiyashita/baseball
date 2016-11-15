@@ -1,0 +1,20 @@
+<h1>新規トーク</h1>
+
+<%= form_for(@group_talk) do |f| %>
+  <div class="col-xs-8">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="col-xs-8">
+    <%= f.label :name %>
+    <%= fields_for(@member) do |member| %>
+      <p><%= member.collection_check_boxes(:user_id, User.where.not(id: current_user.id), :id, :user_name) %></p>
+    <% end %>
+  </div>
+
+  <div class="col-xs-8">
+    <%= f.submit 'グループを作成する', class: 'btn btn-success' %>
+  </div>
+
+<% end %>

@@ -1,0 +1,10 @@
+<h1>トーク一覧</h1>
+
+<% @personal_talks.each do |talk| %>
+  <p><% talk.users.each do |user| %>
+    <%= link_to user.profile.nick_name, personal_talk_path(talk), class: 'btn btn-info' unless user == current_user %>
+  <% end %><p>
+<% end %>
+
+<%#= render partial: 'personal_talks/new', locals: { personal_talk: @personal_talk } %>
+<%= link_to 'トークを開始する', new_personal_talk_path, class: 'btn btn-default' %>

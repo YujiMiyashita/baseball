@@ -17,14 +17,15 @@ class User < ActiveRecord::Base
 
   #グループトーク
   has_many :group_talk_members
-  has_many :group_talks, through: :talk_members
+  has_many :group_talks, through: :group_talk_members
+  has_many :group_talk_messages, dependent: :destroy
   #個人トーク
   has_many :personal_talk_members
   has_many :personal_talks, through: :personal_talk_members
-
-  has_many :personal_talk_messages
+  has_many :personal_talk_messages, dependent: :destroy
 
   enum status: { general: 0, admin: 1 }
+
 
   def self.find_for_facebook(auth, sign_in_resource=nil)
     user = User.find_by(provider: auth.provider, uid: auth.uid) || User.find_by(email: auth.info.email)

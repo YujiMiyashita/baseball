@@ -1,0 +1,11 @@
+<h1>グループトーク</h1>
+
+<% @group_talks.each do |group| %>
+  <p><%= link_to group.name, group_talk_path(group), class: 'btn btn-info' %><p>
+  <p>メンバー：<% group.users.each do |member| %>
+    <%= member.profile.nick_name %>
+    <%= profile_img(member.profile) %>
+   <% end %><p>		  	
+<% end %>
+
+<%= link_to 'グループを作成する', new_group_talk_path, class: 'btn btn-default' %>

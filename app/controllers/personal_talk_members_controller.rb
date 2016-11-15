@@ -17,11 +17,6 @@ class PersonalTalkMembersController < ApplicationController
     redirect_to personal_talk_path(@start_talk)
   end
 
-
-  def destroy
-
-  end
-
   private
 
   def personal_talk_member_params

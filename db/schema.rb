@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111060311) do
+ActiveRecord::Schema.define(version: 20161115164654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,17 @@ ActiveRecord::Schema.define(version: 20161111060311) do
 
   add_index "group_talk_members", ["group_talk_id"], name: "index_group_talk_members_on_group_talk_id", using: :btree
   add_index "group_talk_members", ["user_id"], name: "index_group_talk_members_on_user_id", using: :btree
+
+  create_table "group_talk_messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_talk_id"
+    t.text     "content"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "group_talk_messages", ["group_talk_id"], name: "index_group_talk_messages_on_group_talk_id", using: :btree
+  add_index "group_talk_messages", ["user_id"], name: "index_group_talk_messages_on_user_id", using: :btree
 
   create_table "group_talks", force: :cascade do |t|
     t.string   "name"
@@ -185,6 +196,8 @@ ActiveRecord::Schema.define(version: 20161111060311) do
   add_foreign_key "blogs", "users"
   add_foreign_key "group_talk_members", "group_talks"
   add_foreign_key "group_talk_members", "users"
+  add_foreign_key "group_talk_messages", "group_talks"
+  add_foreign_key "group_talk_messages", "users"
   add_foreign_key "personal_talk_members", "personal_talks"
   add_foreign_key "personal_talk_members", "users"
   add_foreign_key "personal_talk_messages", "personal_talks"

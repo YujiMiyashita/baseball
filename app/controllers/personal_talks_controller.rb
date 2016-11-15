@@ -10,4 +10,9 @@ class PersonalTalksController < ApplicationController
     @messages = @personal_talk.personal_talk_messages.order(created_at: :asc)
     @message = @personal_talk.personal_talk_messages.build
   end
+
+  def new
+    @personal_talk = PersonalTalk.new
+    #fields_for
+  end
 end
