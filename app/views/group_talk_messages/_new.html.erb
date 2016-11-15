@@ -1,5 +1,5 @@
 
-<%= form_for(@message, url: personal_talk_personal_talk_messages_path(@message.personal_talk)) do |f| %>
+<%= form_for(@message, url: group_talk_group_talk_messages_path(@message.group_talk)) do |f| %>
 
   <div class="field">
     <%= f.text_area :content, class: 'form-control' %>
@@ -7,7 +7,7 @@
 
   <div class="hidden">
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.hidden_field :personal_talk_id, value: @message.personal_talk_id %>
+    <%= f.hidden_field :group_talk_id, value: @message.group_talk_id %>
   </div>
 
   <div class="action">

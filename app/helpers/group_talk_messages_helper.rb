@@ -1,0 +1,2 @@
+module GroupTalkMessagesHelper
+end

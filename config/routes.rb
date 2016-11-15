@@ -36,11 +36,19 @@ Rails.application.routes.draw do
   #観戦日記
   resources :blogs
 
-  #トーク機能
+  #個人トーク機能
   resources :personal_talks do
     resources :personal_talk_messages
   end
 
+  #グループトーク機能
+  resources :group_talks do
+    resources :group_talk_messages
+    resources :group_talk_members, only: [:new, :create, :destroy]
+    patch :invite, on: :member
+  end
+
+  #個人トーク開始
   resources :personal_talk_members, only: [:create, :destroy]
 
   #お気に入り
