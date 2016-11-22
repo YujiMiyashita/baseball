@@ -5,11 +5,11 @@ class TicketsController < ApplicationController
   before_action :my_ticket, only: [:draft, :edit, :draft_edit, :update, :destroy]
 
   def index
-    @tickets = Ticket.where(status: true).order(created_at: :desc)
+    @tickets = Ticket.valid.limit_bitween(Time.now).order(created_at: :desc)
   end
 
   def draft_index
-    @tickets = Ticket.where(status: false, user_id: current_user.id).order(updated_at: :desc)
+    @tickets = Ticket.disabled.where(user_id: current_user.id).order(updated_at: :desc)
   end
 
   def show
