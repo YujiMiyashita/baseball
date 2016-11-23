@@ -12,6 +12,12 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'jquery-rails'
 
+gem 'jquery-turbolinks'
+
+gem 'momentjs-rails'
+
+gem 'bootstrap3-datetimepicker-rails'
+
 gem 'turbolinks'
 
 gem 'dotenv-rails'
@@ -30,9 +36,7 @@ gem 'omniauth-facebook'
 
 gem 'twitter-bootstrap-rails'
 
-gem 'momentjs-rails', '>= 2.9.0'
-
-gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
+gem 'autosize-rails'
 
 #画像アップローダー
 gem 'carrierwave'
