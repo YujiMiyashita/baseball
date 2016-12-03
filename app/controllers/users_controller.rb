@@ -51,6 +51,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_player
+    render partial: 'player_select', locals: { team_id: params[:team_id] }
+  end
+
   private
 
   def profile_params

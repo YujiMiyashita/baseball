@@ -13,13 +13,17 @@
   </div>
 
   <div class="field col-xs-8">
+    <%= f.label :ballpark_id %>
+    <%= f.collection_select :ballpark_id, Ballpark.where(status: true), :id, :name, {}, { class: "form-control" } %>
+  </div>
+
+  <div class="team_select">
     <%= f.label :team_id %>
     <%= f.collection_select :team_id, Team.where(status: true), :id, :name, {}, { class: "form-control" } %>
   </div>
 
-  <div class="field col-xs-8">
-    <%= f.label :ballpark_id %>
-    <%= f.collection_select :ballpark_id, Ballpark.where(status: true), :id, :name, {}, { class: "form-control" } %>
+  <div class="player_select">
+    <%= render partial: 'player_select', locals: { team_id: Team.first.id } %>
   </div>
 
   <div class="col-xs-8">
