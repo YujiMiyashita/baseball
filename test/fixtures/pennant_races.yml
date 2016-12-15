@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vote_id: 
+  first: 1
+  second: 1
+  third: 1
+  fourth: 1
+  fifth: 1
+  sixth: 1
+  league: false
+
+two:
+  vote_id: 
+  first: 1
+  second: 1
+  third: 1
+  fourth: 1
+  fifth: 1
+  sixth: 1
+  league: false
