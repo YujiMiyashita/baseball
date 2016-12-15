@@ -1,13 +1,14 @@
-teams = ['未選択', '広島東洋カープ', '読売ジャイアンツ', '横浜DeNAベイスターズ', '東京ヤクルトスワローズ', '阪神タイガース', '中日ドラゴンズ',
-              '北海道日本ハムファイターズ', '福岡ソフトバンクホークス', '千葉ロッテマリーンズ', '東北楽天ゴールデンイーグルス', '埼玉西武ライオンズ', 'オリックスバファローズ']
+central_league = {'広島東洋カープ' => 'マツダスタジアム', '読売ジャイアンツ' => '東京ドーム', '横浜DeNAベイスターズ' => '横浜スタジアム',
+                  '東京ヤクルトスワローズ' => '神宮球場', '阪神タイガース' => '甲子園球場', '中日ドラゴンズ' => 'ナゴヤドーム'}
+pacific_leacue = {'北海道日本ハムファイターズ' => '札幌ドーム', '福岡ソフトバンクホークス' => 'ヤフオクドーム', '千葉ロッテマリーンズ' => 'ZOZOTOWNマリンフィールド',
+                  '東北楽天ゴールデンイーグルス' => 'コボスタ宮城', '埼玉西武ライオンズ' => '西武プリンスドーム', 'オリックスバファローズ' => '京セラドーム大阪'}
 
-ballparks = ['未選択', 'マツダスタジアム', '東京ドーム', '横浜スタジアム', '神宮球場', '甲子園球場', 'ナゴヤドーム',
-              '札幌ドーム', 'ヤフオクドーム', 'QVCマリンフィールド', 'コボスタ宮城', '西武プリンスドーム', '京セラドーム大阪']
-
-teams.each do |team|
-  Team.create(name: team)
+central_league.each do |team, ballpark|
+  team = Team.create(name: team, league: true)
+  Ballpark.create(name: ballpark, team_id: team.id)
 end
 
-ballparks.each do |ballpark|
-  Ballpark.create(name: ballpark)
+pacific_leacue.each do |team, ballpark|
+  team = Team.create(name: team, league: false)
+  Ballpark.create(name: ballpark, team_id: team.id)
 end
