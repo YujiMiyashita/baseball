@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115164654) do
+ActiveRecord::Schema.define(version: 20161215060423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,12 @@ ActiveRecord::Schema.define(version: 20161115164654) do
   create_table "ballparks", force: :cascade do |t|
     t.string   "name"
     t.boolean  "status",     default: true
+    t.integer  "team_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
+
+  add_index "ballparks", ["team_id"], name: "index_ballparks_on_team_id", using: :btree
 
   create_table "blogs", force: :cascade do |t|
     t.string   "title"
@@ -71,6 +74,21 @@ ActiveRecord::Schema.define(version: 20161115164654) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "pennant_races", force: :cascade do |t|
+    t.integer  "vote_id"
+    t.string   "first"
+    t.string   "second"
+    t.string   "third"
+    t.string   "fourth"
+    t.string   "fifth"
+    t.string   "sixth"
+    t.boolean  "league"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "pennant_races", ["vote_id"], name: "index_pennant_races_on_vote_id", using: :btree
 
   create_table "personal_talk_members", force: :cascade do |t|
     t.integer  "user_id"
@@ -129,9 +147,10 @@ ActiveRecord::Schema.define(version: 20161115164654) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
+    t.boolean  "league",     default: false
     t.boolean  "status",     default: true
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -139,9 +158,9 @@ ActiveRecord::Schema.define(version: 20161115164654) do
     t.integer  "user_id"
     t.integer  "ballpark_id"
     t.integer  "visitor_id"
+    t.integer  "seat_id"
     t.integer  "home_id"
     t.integer  "number"
-    t.integer  "price"
     t.datetime "post_start_at"
     t.datetime "post_end_at"
     t.boolean  "status",        default: false
@@ -193,11 +212,20 @@ ActiveRecord::Schema.define(version: 20161115164654) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
+  create_table "votes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+
   add_foreign_key "blogs", "users"
   add_foreign_key "group_talk_members", "group_talks"
   add_foreign_key "group_talk_members", "users"
   add_foreign_key "group_talk_messages", "group_talks"
   add_foreign_key "group_talk_messages", "users"
+  add_foreign_key "pennant_races", "votes"
   add_foreign_key "personal_talk_members", "personal_talks"
   add_foreign_key "personal_talk_members", "users"
   add_foreign_key "personal_talk_messages", "personal_talks"
@@ -206,4 +234,5 @@ ActiveRecord::Schema.define(version: 20161115164654) do
   add_foreign_key "seats", "ballparks"
   add_foreign_key "tickets", "ballparks"
   add_foreign_key "tickets", "users"
+  add_foreign_key "votes", "users"
 end
