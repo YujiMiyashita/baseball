@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   has_many :personal_talks, through: :personal_talk_members
   has_many :personal_talk_messages, dependent: :destroy
 
+  has_many :tickets, dependent: :destroy
+
   enum status: { general: 0, admin: 1 }
 
 
