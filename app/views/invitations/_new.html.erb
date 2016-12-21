@@ -1,0 +1,3 @@
+<%= form_for(ticket.reverse_invitations.build, url: ticket_invitations_path(ticket)) do |f| %>
+  <%= f.submit "#{reminder_ticket(ticket)}", class: 'btn btn-success' %>
+<% end %>

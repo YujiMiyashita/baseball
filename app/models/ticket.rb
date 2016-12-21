@@ -4,6 +4,9 @@ class Ticket < ActiveRecord::Base
   belongs_to :visitor, class_name: 'Team'
   belongs_to :home, class_name: 'Team'
 
+  has_many :reverse_invitations, class_name: 'Invitation', foreign_key: 'ticket_id'
+  has_many :invite_users, through: :reverse_invitations
+
   scope :index_all, -> {
     select(:id, :playball, :user_id, :ballpark_id, :visitor_id, :home_id,
     :seat_id, :number, :post_start_at, :post_end_at, :detail, :created_at, :status)

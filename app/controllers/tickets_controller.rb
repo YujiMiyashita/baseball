@@ -79,11 +79,12 @@ class TicketsController < ApplicationController
   end
 
   def my_ticket
+    binding.pry
     redirect_to tickets_url unless @ticket.user == current_user
   end
 
   def set_draft_ticket
-    @ticket = Ticket.find_by(id: params[:id], status: false, user_id: current_user.id)
+    @ticket = Ticket.find_by(id: params[:id], status: 0, user_id: current_user.id)
   end
 
   def ticket_params
