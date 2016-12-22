@@ -79,7 +79,6 @@ class TicketsController < ApplicationController
   end
 
   def my_ticket
-    binding.pry
     redirect_to tickets_url unless @ticket.user == current_user
   end
 

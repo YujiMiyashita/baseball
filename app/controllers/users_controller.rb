@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   def mypage
     @user = current_user
+    @offer_tickets = @user.offer_tickets
     if @user.profile.nil?
       redirect_to new_profile_path, notice: 'プロフィールを投稿しましょう'
     else

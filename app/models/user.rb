@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   has_many :tickets, dependent: :destroy
   #勧誘
   has_many :invitations, dependent: :destroy
-  has_many :invite_tickets, through: :invitations
+  has_many :offer_tickets, through: :invitations, source: :ticket
 
   scope :index_all, -> {
     select(:id, :user_name, :created_at)

@@ -1,4 +1,4 @@
-<h1>チケット一覧</h1>
+<h2>チケット一覧</h2>
 
 <table class="table table-striped">
   <thead>
@@ -15,10 +15,13 @@
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr>
-        <td><%= ticket.playball.strftime("%m月%d日 %H:%M") %> at <%= ticket.ballpark.name %></td>
-        <td><%= ticket.home.name %> vs <%= ticket.visitor.name %></td>
+        <td><%= ticket.playball.strftime("%m月%d日 %H:%M") %><br>
+            <%= ticket.ballpark.name %></td>
+        <td><%= ticket.home.name %><br>
+             vs <%= ticket.visitor.name %></td>
         <td><%= ticket.number %>枚</td>
-        <td><%= link_to ticket.user.profile.nick_name, user_path(ticket.user) %> <%= profile_img(ticket.user.profile) %></td>
+        <td><%= link_to ticket.user.profile.nick_name, user_path(ticket.user) %><br>
+            <%= profile_img(ticket.user.profile) %></td>
         <td><%= ticket.post_end_at.strftime("%Y年%m月%d日") %>まで</td>
         <td><%= link_to '詳細', ticket, class: 'btn btn-default' %></td>
         <td><%= invitation_ticket(ticket) unless current_user == ticket.user %></td>

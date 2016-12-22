@@ -1,14 +1,12 @@
-<div class="col-xs-10 col-xs-offset-1">
-  <h1>詳細画面</h1>
-    <p><%= @ticket.playball.strftime("%Y年%m月%d日 %H:%M PLAYBALL") %> at <%= @ticket.ballpark.name %></p>
-    <p><%= @ticket.home.name %> vs <%= @ticket.visitor.name %></p>
-    <p><%= @ticket.number %>枚</p>
-    <p>掲載期間：<%= @ticket.post_start_at.strftime("%Y年%m月%d日") %>〜<%= @ticket.post_end_at.strftime("%Y年%m月%d日") %></p>
+<h1>詳細画面</h1>
+  <p><%= @ticket.playball.strftime("%Y年%m月%d日 %H:%M PLAYBALL") %> at <%= @ticket.ballpark.name %></p>
+  <p><%= @ticket.home.name %> vs <%= @ticket.visitor.name %></p>
+  <p><%= @ticket.number %>枚</p>
+  <p>掲載期間：<%= @ticket.post_start_at.strftime("%Y年%m月%d日") %>〜<%= @ticket.post_end_at.strftime("%Y年%m月%d日") %></p>
 
-    <% if @ticket.user == current_user %>
-      <p><%= link_to '編集する', edit_ticket_path(@ticket), class: 'btn btn-info' %>
-         <%= link_to '削除する', @ticket, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-         <%= button_to '下書きに登録する', registration_ticket_path(@ticket), method: :patch, class: 'btn btn-success', name: 'draft' %></p>
-      <p><%= link_to 'チケット一覧', tickets_path, class: 'btn btn-default' %></p>
-    <% end %>
-</div>
+  <% if @ticket.user == current_user %>
+    <p><%= link_to '編集する', edit_ticket_path(@ticket), class: 'btn btn-info' %>
+       <%= link_to '削除する', @ticket, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+       <%= button_to '下書きに登録する', registration_ticket_path(@ticket), method: :patch, class: 'btn btn-success', name: 'draft' %></p>
+    <p><%= link_to 'チケット一覧', tickets_path, class: 'btn btn-default' %></p>
+  <% end %>

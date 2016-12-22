@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   #ルート
-  root 'top#index'
+  root 'users#mypage'
 
   #球団登録
   resources :teams

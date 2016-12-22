@@ -1,11 +1,14 @@
-<h1>ユーザ詳細画面</h1>
+<h2><%= @user.profile.nick_name %>　<%= profile_img(@user.profile) %></h2>
 
 <% if @user.profile.present? %>
-  <%= render partial: 'profile_field', locals: { user: @user } %>
+  <p>好きな球団：<%= @user.profile.team.name %></p>
+  <p>よく行く球場：<%= @user.profile.ballpark.name %></p>
+  <p><%= simple_format(@user.profile.content) %></p>
 <% else %>
   <p>プロフィールがまだ登録されていません</p>
 <% end %>
 
-<%= render partial: 'favorites/form', locals: { user: @user } %>
-<%= render partial: 'personal_talks/new', locals: { user: @user } %>
+<%= render 'favorites/form', user: @user unless @user == current_user %>
+<%= render 'personal_talks/new', user: @user %>
+<%= render 'offer_tickets', offer_tickets: @offer_tickets %>
 <%= link_to 'プロフィール編集', edit_profile_path if @user == current_user %>
