@@ -12,24 +12,24 @@
     </div>
   <% end %>
 
-  <div class="col-xs-8">
+  <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title, class: 'form-control', placeholder: 'タイトル' %>
   </div>
 
-  <div class="col-xs-8">
+  <div class="field">
     <%= f.label :content %><br>
     <%= f.text_area :content, class: 'form-control', placeholder: '内容' %>
   </div>
 
-  <div class="col-xs-8">
+  <div class="field">
     <%= f.label :image %><br>
     <%= image_tag(@blog.image, width: 300, height: 200) if @blog.image.present? %>
     <%= f.file_field :image %>
     <%= f.hidden_field :image_cache %>
   </div>
 
-  <div class="col-xs-8">
+  <div class="action">
     <%= f.submit '日記を保存する', class: 'btn btn-success' %>
     <%= link_to '日記一覧へ戻る', blogs_path, class: 'btn btn-default' %>
   </div>

@@ -9,11 +9,14 @@
 </head>
 <body>
 
-<%= render 'layouts/normal/header' %>
+<%= render 'layouts/normal/header' %><br><br><br><br><br><br><br><br>
 <p class="bg-success"><%= notice %></p>
 <p class="bg-danger"><%= alert %></p>
 
-<%= yield %>
+<div class="col-md-8 col-md-offset-2">
+  <%= yield %>
+</div>
+
 
 <%= render 'layouts/normal/footer' %>
 
