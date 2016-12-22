@@ -19,7 +19,6 @@
           <td><%= ticket.playball.strftime("%m月%d日 %H:%M") %> at <%= ticket.ballpark.name %></td>
           <td><%= ticket.home.name %> vs <%= ticket.visitor.name %></td>
           <td><%= ticket.number %>枚</td>
-          <td><%= ticket.price %>円/枚</td>
           <td><%= ticket.post_end_at.strftime("%Y年%m月%d日 %H時%M分") %>まで</td>
           <td><%= link_to '詳細を見る', draft_ticket_path(ticket), class: 'btn btn-default' %></td>
         </tr>

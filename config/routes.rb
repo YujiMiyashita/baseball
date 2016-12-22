@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   #ルート
   root 'top#index'
 
@@ -31,7 +32,11 @@ Rails.application.routes.draw do
       get :draft_edit
       patch :registration
     end
+
+    resources :invitations, only: [:create, :destroy]
   end
+
+
 
   #観戦日記
   resources :blogs

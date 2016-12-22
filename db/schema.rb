@@ -11,17 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115164654) do
+ActiveRecord::Schema.define(version: 20161221083014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "answers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ballparks", force: :cascade do |t|
     t.string   "name"
     t.boolean  "status",     default: true
+    t.integer  "team_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
+
+  add_index "ballparks", ["team_id"], name: "index_ballparks_on_team_id", using: :btree
 
   create_table "blogs", force: :cascade do |t|
     t.string   "title"
@@ -72,6 +80,32 @@ ActiveRecord::Schema.define(version: 20161115164654) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "ticket_id"
+    t.integer  "status",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "invitations", ["ticket_id"], name: "index_invitations_on_ticket_id", using: :btree
+  add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
+
+  create_table "pennant_races", force: :cascade do |t|
+    t.boolean  "league"
+    t.integer  "first_team_id"
+    t.integer  "second_team_id"
+    t.integer  "third_team_id"
+    t.integer  "fourth_team_id"
+    t.integer  "fifth_team_id"
+    t.integer  "sixth_team_id"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "pennant_races", ["user_id"], name: "index_pennant_races_on_user_id", using: :btree
+
   create_table "personal_talk_members", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "personal_talk_id"
@@ -117,6 +151,15 @@ ActiveRecord::Schema.define(version: 20161115164654) do
   add_index "profiles", ["team_id"], name: "index_profiles_on_team_id", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
+  create_table "rankings", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "rankings", ["user_id"], name: "index_rankings_on_user_id", using: :btree
+
   create_table "seats", force: :cascade do |t|
     t.string   "name"
     t.integer  "price"
@@ -129,9 +172,10 @@ ActiveRecord::Schema.define(version: 20161115164654) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
+    t.boolean  "league",     default: false
     t.boolean  "status",     default: true
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -140,18 +184,23 @@ ActiveRecord::Schema.define(version: 20161115164654) do
     t.integer  "ballpark_id"
     t.integer  "visitor_id"
     t.integer  "home_id"
+    t.integer  "seat_id"
     t.integer  "number"
-    t.integer  "price"
     t.datetime "post_start_at"
     t.datetime "post_end_at"
-    t.boolean  "status",        default: false
-    t.boolean  "format",        default: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.integer  "status",        default: 0
+    t.string   "detail"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "tickets", ["ballpark_id"], name: "index_tickets_on_ballpark_id", using: :btree
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id", using: :btree
+
+  create_table "trades", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "tribes", force: :cascade do |t|
     t.integer  "follower_id"
@@ -198,11 +247,15 @@ ActiveRecord::Schema.define(version: 20161115164654) do
   add_foreign_key "group_talk_members", "users"
   add_foreign_key "group_talk_messages", "group_talks"
   add_foreign_key "group_talk_messages", "users"
+  add_foreign_key "invitations", "tickets"
+  add_foreign_key "invitations", "users"
+  add_foreign_key "pennant_races", "users"
   add_foreign_key "personal_talk_members", "personal_talks"
   add_foreign_key "personal_talk_members", "users"
   add_foreign_key "personal_talk_messages", "personal_talks"
   add_foreign_key "personal_talk_messages", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "rankings", "users"
   add_foreign_key "seats", "ballparks"
   add_foreign_key "tickets", "ballparks"
   add_foreign_key "tickets", "users"
