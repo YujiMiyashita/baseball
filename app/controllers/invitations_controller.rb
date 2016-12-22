@@ -1,4 +1,6 @@
 class InvitationsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     invitation = current_user.invitations.build(ticket_id: params[:ticket_id])
     if invitation.save
