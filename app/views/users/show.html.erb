@@ -6,4 +6,6 @@
   <p>プロフィールがまだ登録されていません</p>
 <% end %>
 
+<%= render partial: 'favorites/form', locals: { user: user } %>
+<%= render partial: 'personal_talks/new', locals: { user: user } %>
 <%= link_to 'プロフィール編集', edit_profile_path if @user == current_user %>

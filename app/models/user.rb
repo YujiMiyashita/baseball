@@ -29,6 +29,12 @@ class User < ActiveRecord::Base
   has_many :invitations, dependent: :destroy
   has_many :invite_tickets, through: :invitations
 
+  scope :index_all, -> {
+    select(:id, :user_name, :created_at)
+    .order(created_at: :asc)
+  }
+
+  paginates_per 20
 
   enum status: { general: 0, admin: 1 }
 

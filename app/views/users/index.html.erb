@@ -1,11 +1,10 @@
-<h1>Users#index</h1>
+<h1>ユーザー一覧</h1>
 <% @users.each do |user| %>
-  <div class="field">
-    <%= profile_img(user.profile) %>
-    <%= user.user_name %>
-    <%= link_to 'プロフィール', user_path(user) %>
-    <%= render partial: 'favorites/form', locals: { user: user } %>
-    <%= render partial: 'tribes/form', locals: { user: user } %>
-    <%= render partial: 'personal_talks/new', locals: { user: user } %>
+  <div class="col-md-3 col-md-offset-1 col-xs-5 col-xs-offset-1">
+    <p><%= profile_img(user.profile) %> <%= user.user_name %></p>
+    <p><%= link_to 'プロフィール', user_path(user) %></p>
+    <p><%= render partial: 'tribes/form', locals: { user: user } %></p>
   </div>
 <% end %>
+
+<%= paginate @users %>

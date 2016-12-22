@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_profile, only: [:new, :edit, :update]
 
   def index
-    @users = User.all
+    @users = User.index_all.page(params[:page])
   end
 
   def show
@@ -20,7 +21,6 @@ class UsersController < ApplicationController
   end
 
   def new
-    @profile = Profile.find_by(user_id: current_user.id)
     if @profile.present?
       redirect_to edit_profile_path
     else
@@ -29,8 +29,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @profile = Profile.new(profile_params)
-    @profile.user_id = current_user.id
+    @profile = current_user.profile.build(profile_params)
     if @profile.save
       redirect_to user_path(current_user), notice: 'プロフィールを更新しました'
     else
@@ -39,11 +38,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @profile = Profile.find_by(user_id: current_user.id)
   end
 
   def update
-    @profile = Profile.find_by(user_id: current_user.id)
     if @profile.update(profile_params)
       redirect_to user_path(current_user), notice: 'プロフィールを更新しました'
     else
@@ -52,6 +49,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_profile
+    @profile = Profile.find_by(user_id: current_user.id)
+  end
 
   def profile_params
     params.require(:profile).permit(:nick_name, :content, :back_image, :team_id, :ballpark_id, :player_id, :avatar, :avatar_cache)
