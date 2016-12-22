@@ -8,7 +8,10 @@
   <p>プロフィールがまだ登録されていません</p>
 <% end %>
 
-<%= render 'favorites/form', user: @user unless @user == current_user %>
-<%= render 'personal_talks/new', user: @user %>
-<%= render 'offer_tickets', offer_tickets: @offer_tickets %>
-<%= link_to 'プロフィール編集', edit_profile_path if @user == current_user %>
+<% if @user == current_user %>
+  <%= render 'offer_tickets', offer_tickets: @offer_tickets %>
+  <%= link_to 'プロフィール編集', edit_profile_path %>
+<% elsif @user != current_user %>
+  <%= render 'favorites/form', user: @user %>
+  <%= render 'personal_talks/new', user: @user %>
+<% end %>
