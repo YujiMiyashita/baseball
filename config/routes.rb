@@ -38,6 +38,11 @@ Rails.application.routes.draw do
     resources :invitations, only: [:create, :destroy]
   end
 
+  #投票
+  namespace :votes do
+    resources :pennant_races
+    resources :rankings
+  end
 
 
   #観戦日記

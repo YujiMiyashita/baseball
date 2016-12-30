@@ -93,12 +93,14 @@ ActiveRecord::Schema.define(version: 20161221083014) do
 
   create_table "pennant_races", force: :cascade do |t|
     t.boolean  "league"
+    t.integer  "season"
     t.integer  "first_team_id"
     t.integer  "second_team_id"
     t.integer  "third_team_id"
     t.integer  "fourth_team_id"
     t.integer  "fifth_team_id"
     t.integer  "sixth_team_id"
+    t.text     "content"
     t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false

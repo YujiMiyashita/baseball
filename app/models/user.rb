@@ -29,6 +29,9 @@ class User < ActiveRecord::Base
   has_many :invitations, dependent: :destroy
   has_many :offer_tickets, through: :invitations, source: :ticket
 
+  #順位予想
+  has_many :pennant_races
+
   scope :index_all, -> {
     select(:id, :user_name, :created_at)
     .order(created_at: :asc)
