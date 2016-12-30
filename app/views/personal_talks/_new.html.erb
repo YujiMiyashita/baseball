@@ -1,5 +1,5 @@
 <% unless user == current_user %>
-  <%= form_for(user.personal_talk_members.build, url: personal_talk_members_path) do |f| %>
+  <%= form_for(@user.personal_talk_members.build, url: personal_talk_members_path) do |f| %>
     <%= f.hidden_field :user_id, value: user.id %>
     <%= f.submit 'トークを開始する', class: 'btn btn-success' %>
   <% end %>

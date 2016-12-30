@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+
   #ルート
-  root 'top#index'
+  root 'users#mypage'
 
   #球団登録
   resources :teams
@@ -33,7 +34,11 @@ Rails.application.routes.draw do
       get :draft_edit
       patch :registration
     end
+
+    resources :invitations, only: [:create, :destroy]
   end
+
+
 
   #観戦日記
   resources :blogs

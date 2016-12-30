@@ -1,35 +1,33 @@
-<h1>チケット一覧</h1>
+<h2>チケット一覧</h2>
 
-<div class="col-xs-10 col-xs-offset-1">
-  <table class="table table-striped">
-    <thead>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>PLAYBALL</th>
+      <th>対戦</th>
+      <th>枚数</th>
+      <th>投稿者</th>
+      <th>掲載期間</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tickets.each do |ticket| %>
       <tr>
-        <th>PLAYBALL</th>
-        <th>対戦</th>
-        <th>枚数</th>
-        <th>価格</th>
-        <th>投稿者</th>
-        <th>掲載期間</th>
-        <th colspan="3"></th>
+        <td><%= ticket.playball.strftime("%m月%d日 %H:%M") %><br>
+            <%= ticket.ballpark.name %></td>
+        <td><%= ticket.home.name %><br>
+             vs <%= ticket.visitor.name %></td>
+        <td><%= ticket.number %>枚</td>
+        <td><%= link_to ticket.user.profile.nick_name, user_path(ticket.user) %><br>
+            <%= profile_img(ticket.user.profile) %></td>
+        <td><%= ticket.post_end_at.strftime("%Y年%m月%d日") %>まで</td>
+        <td><%= link_to '詳細', ticket, class: 'btn btn-default' %></td>
+        <td><%= invitation_ticket(ticket) unless current_user == ticket.user %></td>
       </tr>
-    </thead>
+    <% end %>
+  </tbody>
+</table>
 
-    <tbody>
-      <% @tickets.each do |ticket| %>
-        <tr>
-          <td><%= ticket.playball.strftime("%m月%d日 %H:%M") %> at <%= ticket.ballpark.name %></td>
-          <td><%= ticket.home.name %> vs <%= ticket.visitor.name %></td>
-          <td><%= ticket.number %>枚</td>
-          <td><%= ticket.price %>円/枚</td>
-          <td><%= link_to ticket.user.profile.nick_name, user_path(ticket.user) %> <%= profile_img(ticket.user.profile) %></td>
-          <td><%= ticket.post_end_at.strftime("%Y年%m月%d日 %H時%M分") %>まで</td>
-          <td><%= link_to '詳細', ticket, class: 'btn btn-default' %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
-<div class="col-xs-10 col-xs-offset-1">
-  <%= link_to '新規チケット', new_ticket_path, class: 'btn btn-info' %>
-</div>
+<%= link_to '新規チケット', new_ticket_path, class: 'btn btn-info' %>

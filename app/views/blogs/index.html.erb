@@ -1,12 +1,11 @@
 <h1>観戦日記</h1>
 
-<div class="col-xs-10 col-xs-offset-1">
-  <% @blogs.each do |blog| %>
-    <div class="timeline">
-      <h3><%= link_to blog.title, blog %></h3>
-      <p><%= image_tag(blog.image, width: 300, height: 200) %></p>
-      <p>Written by <%= blog.user.profile.nick_name %></p>
-    </div>
-  <% end %>
+<% @blogs.each do |blog| %>
+  <div class="timeline">
+    <h3><%= link_to blog.title, blog %></h3>
+    <p><%= image_tag(blog.image, width: 300, height: 200) if blog.image? %></p>
+    <p>Written by <%= link_to blog.user.profile.nick_name, user_path(blog.user) %></p>
+  </div>
+<% end %>
+
 <p><%= link_to 'New Blog', new_blog_path, class: 'btn btn-default' %></p>
-</div>

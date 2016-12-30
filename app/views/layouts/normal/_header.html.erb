@@ -1,17 +1,52 @@
-<ul class="normal_header_ul">
-  <li><%= link_to 'トップに戻る', root_path %></li>
-  <li><%= link_to 'チケット一覧', tickets_path %></li>
-  <% if current_user.present? %>
-    <li><%= link_to 'ブログ一覧', blogs_path %></li>
-    <li><%= link_to 'ユーザ一覧', users_path %></li>
-    <li><%= link_to 'チケット下書き一覧', draft_index_tickets_path %></li>
-    <li><%= link_to 'マイページ', mypage_profile_path %></li>
-    <li><%= link_to 'ユーザー設定', edit_user_registration_path %></li>
-    <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-    <li><%= link_to '個人トーク一覧', personal_talks_path %></li>
-    <li><%= link_to 'グループトーク', group_talks_path %></li>
-  <% else %>
-    <li><%= link_to 'ログイン', new_user_session_path %></li>
-    <li><%= link_to 'ユーザー登録', new_user_registration_path %></li>
-  <% end %>
-</ul>
+<header id="top-head">
+  <div class="inner">
+    <div id="mobile-head">
+      <p class="logo"><%= link_to 'トップに戻る', root_path %></p>
+      <div id="nav-toggle">
+        <div>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <nav id="global-nav">
+      <ul>
+        <% if current_user.present? %>
+          <li><%= link_to 'チケット', tickets_path %></li>
+          <li><%= link_to '観戦日記', blogs_path %></li>
+          <li><a href="#">投票</a></li>
+          <li><%= link_to 'ユーザ一覧', users_path %></li>
+          <li><%= link_to '設定', edit_user_registration_path %></li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'ログイン', new_user_session_path %></li>
+          <li><%= link_to 'ユーザー登録', new_user_registration_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+(function($) {
+    $(function() {
+        var $header = $('#top-head');
+        // Nav Fixed
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 350) {
+                $header.addClass('fixed');
+            }
+            else {
+                $header.removeClass('fixed');
+            }
+        });
+        // Nav Toggle Button
+        $('#nav-toggle').click(function(){
+            $header.toggleClass('open');
+        });
+    });
+})(jQuery);
+</script>

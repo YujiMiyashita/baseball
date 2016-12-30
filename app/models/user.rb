@@ -23,6 +23,18 @@ class User < ActiveRecord::Base
   has_many :personal_talk_members
   has_many :personal_talks, through: :personal_talk_members
   has_many :personal_talk_messages, dependent: :destroy
+  #チケット
+  has_many :tickets, dependent: :destroy
+  #勧誘
+  has_many :invitations, dependent: :destroy
+  has_many :offer_tickets, through: :invitations, source: :ticket
+
+  scope :index_all, -> {
+    select(:id, :user_name, :created_at)
+    .order(created_at: :asc)
+  }
+
+  paginates_per 20
 
   enum status: { general: 0, admin: 1 }
 

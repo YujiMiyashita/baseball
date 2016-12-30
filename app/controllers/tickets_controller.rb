@@ -1,15 +1,15 @@
 class TicketsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :set_draft_ticket, only: [:draft, :draft_edit]
   before_action :my_ticket, only: [:draft, :edit, :draft_edit, :update, :destroy]
 
   def index
-    @tickets = Ticket.valid.limit_bitween(Time.now).order(created_at: :desc)
+    @tickets = Ticket.index_all.valid.limit_bitween(Time.now)
   end
 
   def draft_index
-    @tickets = Ticket.disabled.where(user_id: current_user.id).order(updated_at: :desc)
+    @tickets = Ticket.index_all.disabled.my_ticket(current_user)
   end
 
   def show
@@ -30,18 +30,17 @@ class TicketsController < ApplicationController
   end
 
   def registration
-    if params[:commit] == '下書きに登録する'
-      Ticket.update(params[:id], status: false)
+    if params[:draft].present?
+      Ticket.update(params[:id], status: 0)
       redirect_to draft_index_tickets_url, notice: 'チケットを下書き一覧に登録しました'
     else
-      Ticket.update(params[:id], status: true)
+      Ticket.update(params[:id], status: 1)
       redirect_to tickets_url, notice: 'チケットを本登録しました'
     end
   end
 
   def draft_create
-    @ticket = Ticket.new(ticket_params)
-    @ticket.user_id = current_user.id
+    @ticket = current_user.tickets.build(ticket_params)
 
     if @ticket.save
       redirect_to draft_ticket_url(@ticket), notice: 'チケットを下書き登録しました'
@@ -84,10 +83,10 @@ class TicketsController < ApplicationController
   end
 
   def set_draft_ticket
-    @ticket = Ticket.find_by(id: params[:id], status: false, user_id: current_user.id)
+    @ticket = Ticket.find_by(id: params[:id], status: 0, user_id: current_user.id)
   end
 
   def ticket_params
-    params.require(:ticket).permit(:playball, :ballpark_id, :visitor_id, :home_id, :number, :post_start_at, :post_end_at, :format, :price)
+    params.require(:ticket).permit(:playball, :ballpark_id, :visitor_id, :home_id, :number, :post_start_at, :post_end_at)
   end
 end

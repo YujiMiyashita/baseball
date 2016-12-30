@@ -1,13 +1,16 @@
-teams = ['未選択', '広島東洋カープ', '読売ジャイアンツ', '横浜DeNAベイスターズ', '東京ヤクルトスワローズ', '阪神タイガース', '中日ドラゴンズ',
-              '北海道日本ハムファイターズ', '福岡ソフトバンクホークス', '千葉ロッテマリーンズ', '東北楽天ゴールデンイーグルス', '埼玉西武ライオンズ', 'オリックスバファローズ']
+100.times do |user|
+  user = User.create(
+    user_name: Faker::Name.name,
+    uid: 'hogehoge',
+    email: Faker::Internet.email,
+    password: 'hogehoge'
+  )
 
-ballparks = ['未選択', 'マツダスタジアム', '東京ドーム', '横浜スタジアム', '神宮球場', '甲子園球場', 'ナゴヤドーム',
-              '札幌ドーム', 'ヤフオクドーム', 'QVCマリンフィールド', 'コボスタ宮城', '西武プリンスドーム', '京セラドーム大阪']
-
-teams.each do |team|
-  Team.create(name: team)
-end
-
-ballparks.each do |ballpark|
-  Ballpark.create(name: ballpark)
+  Profile.create(
+    nick_name: Faker::Name.name,
+    user_id: user.id,
+    content: 'よろしくお願いいたします',
+    team_id: 1,
+    ballpark_id: 1
+  )
 end
