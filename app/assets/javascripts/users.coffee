@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on 'change', '#profile_team_id', ->
+  $.ajax(
+    type: 'GET'
+    url: '/users/get_player'
+    data: {
+      team_id: $(this).val()
+    }
+  ).done (data) ->
+    $('.player_select').html(data)

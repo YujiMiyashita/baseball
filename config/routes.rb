@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
   #ユーザ一覧
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    get :get_player, on: :collection
+  end
   #プロフィール変更
   resource :profile, controller: :users, only: [:new, :create, :edit, :update] do
     get :mypage, on: :collection

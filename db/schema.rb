@@ -132,6 +132,17 @@ ActiveRecord::Schema.define(version: 20161221083014) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "players", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "status",     default: 0
+    t.integer  "position",   default: 0
+    t.integer  "team_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "players", ["team_id"], name: "index_players_on_team_id", using: :btree
+
   create_table "profiles", force: :cascade do |t|
     t.string   "avatar"
     t.string   "image_url"
@@ -254,6 +265,7 @@ ActiveRecord::Schema.define(version: 20161221083014) do
   add_foreign_key "personal_talk_members", "users"
   add_foreign_key "personal_talk_messages", "personal_talks"
   add_foreign_key "personal_talk_messages", "users"
+  add_foreign_key "players", "teams"
   add_foreign_key "profiles", "users"
   add_foreign_key "rankings", "users"
   add_foreign_key "seats", "ballparks"
