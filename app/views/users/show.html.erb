@@ -2,6 +2,7 @@
 
 <% if @user.profile.present? %>
   <p>好きな球団：<%= @user.profile.team.name %></p>
+  <p>好きな選手：<%= @user.profile.player.name %></p>
   <p>よく行く球場：<%= @user.profile.ballpark.name %></p>
   <p><%= simple_format(@user.profile.content) %></p>
 <% else %>

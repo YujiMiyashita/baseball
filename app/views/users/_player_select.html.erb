@@ -1,0 +1,2 @@
+<%= label :profile, :player_id %>
+<%= collection_select :profile, :player_id, Player.where(team_id: team_id), :id, :name, {}, { class: "form-control" } %>

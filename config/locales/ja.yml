@@ -215,6 +215,7 @@ ja:
         content: ひとこと
         nick_name: ニックネーム
         team_id: 好きなチーム
+        player_id: 好きな選手
         ballpark_id: よく行く球場
         back_image: 背景画像
       team:

@@ -5,17 +5,21 @@
     <%= f.text_field :nick_name, class: 'form-control' %>
   </div>
 
-  <div class="field field">
+  <div class="field">
     <%= f.label :content %>
     <%= f.text_area :content, class: 'form-control' %>
   </div>
 
-  <div class="field field">
+  <div class="team_select">
     <%= f.label :team_id %>
     <%= f.collection_select :team_id, Team.where(status: true), :id, :name, {}, { class: "form-control" } %>
   </div>
 
-  <div class="field field">
+  <div class="player_select">
+   <%= render partial: 'player_select', locals: { team_id: @profile.team || Team.first.id } %>
+  </div>
+
+  <div class="field">
     <%= f.label :ballpark_id %>
     <%= f.collection_select :ballpark_id, Ballpark.where(status: true), :id, :name, {}, { class: "form-control" } %>
   </div>
