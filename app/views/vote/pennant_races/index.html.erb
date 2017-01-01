@@ -1,0 +1,24 @@
+<h2><%= Date.today.year %>年シーズン ペナント順位予想</h2>
+
+<div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active" role="presentation">
+      <a aria-controls="tab_a" data-toggle="tab" href="#tab_a" role="tab">セ・リーグ予想</a>
+    </li>
+    <li role="presentation">
+      <a aria-controls="tab_b" data-toggle="tab" href="#tab_b" role="tab">パ・リーグ予想</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab_a" role="tabpanel">
+      <% @central_anticipates.each do |pennant| %>
+        <%= render 'pennant_race', { pennant: pennant } %>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="tab_b" role="tabpanel">
+      <% @pacific_anticipates.each do |pennant| %>
+        <%= render 'pennant_race', { pennant: pennant } %>
+      <% end %>
+    </div>
+  </div>
+</div>

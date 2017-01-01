@@ -1,0 +1,20 @@
+<h2>予想する</h2>
+
+<div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active" role="presentation">
+      <a aria-controls="tab_a" data-toggle="tab" href="#tab_a" role="tab">セ・リーグ予想</a>
+    </li>
+    <li role="presentation">
+      <a aria-controls="tab_b" data-toggle="tab" href="#tab_b" role="tab">パ・リーグ予想</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane" id="tab_a" role="tabpanel">
+      <%= render 'central_form', { central_teams: @central_teams } %>
+    </div>
+    <div class="tab-pane active" id="tab_b" role="tabpanel">
+      <%= render 'pacific_form', { pacific_teams: @pacific_teams } %>
+    </div>
+  </div>
+</div>

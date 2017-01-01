@@ -1,0 +1,41 @@
+<%= form_for([:vote, PennantRace.new]) do |f| %>
+  <div class="field">
+    <%= f.label :first_team_id %>
+    <%= f.collection_select :first_team_id, @pacific_teams, :id, :name, {}, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :second_team_id %>
+    <%= f.collection_select :second_team_id, @pacific_teams, :id, :name, {}, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :third_team_id %>
+    <%= f.collection_select :third_team_id, @pacific_teams, :id, :name, {}, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fourth_team_id %>
+    <%= f.collection_select :fourth_team_id, @pacific_teams, :id, :name, {}, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fifth_team_id %>
+    <%= f.collection_select :fifth_team_id, @pacific_teams, :id, :name, {}, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sixth_team_id %>
+    <%= f.collection_select :sixth_team_id, @pacific_teams, :id, :name, {}, class: 'form-control' %>
+  </div>
+
+  <div class="hidden">
+    <%= f.hidden_field :season, value: Date.today.year %>
+    <%= f.hidden_field :league, value: 'pacific' %>
+  </div>
+
+  <div class="field">
+    <%= f.submit 'パ・リーグを予想する', class: 'btn btn-success' %>
+  </div>
+
+<% end %>
