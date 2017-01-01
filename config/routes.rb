@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
 
   #投票
-  namespace :votes do
+  namespace :vote do
     resources :pennant_races
     resources :rankings
   end
