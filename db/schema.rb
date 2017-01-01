@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 20161221083014) do
     t.datetime "updated_at",     null: false
   end
 
+  add_index "pennant_races", ["user_id", "league", "season"], name: "index_pennant_races_on_user_id_and_league_and_season", unique: true, using: :btree
   add_index "pennant_races", ["user_id"], name: "index_pennant_races_on_user_id", using: :btree
 
   create_table "personal_talk_members", force: :cascade do |t|

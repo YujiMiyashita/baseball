@@ -12,6 +12,8 @@ class CreatePennantRaces < ActiveRecord::Migration
       t.text    :content
       t.references :user, index: true, foreign_key: true
       t.timestamps null: false
+
+      t.index [:user_id, :league, :season], unique: true
     end
   end
 end
