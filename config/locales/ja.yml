@@ -244,3 +244,11 @@ ja:
         content: 内容
         user_id: 投稿者
         image: 画像
+      pennant_race:
+        first_team_id: １位
+        second_team_id: ２位
+        third_team_id: ３位
+        fourth_team_id: ４位
+        fifth_team_id: ５位
+        sixth_team_id: ６位
+        user_id: 予想者
