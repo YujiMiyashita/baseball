@@ -1,13 +1,21 @@
-<ul class="admin_header_ul">
-  <li><%= link_to 'トップに戻る', root_path %></li>
-  <li><%= link_to 'チケット一覧', tickets_path %></li>
-  <% if current_user.present? %>
-    <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-    <li><%= link_to 'マイページ', mypage_profile_path %></li>
-    <li><%= link_to 'ユーザ一覧', users_path %></li>
-    <li><%= link_to 'チケット下書き一覧', draft_index_tickets_path %></li>
-    <li><%= link_to 'ユーザー設定', edit_user_registration_path %></li>
-  <% else %>
-    <li><%= link_to 'ログイン', new_user_session_path %></li>
+<header id="header">
+  <%= link_to root_path do %>
+    <%= image_tag('baseball.png', id: 'header-logo') %>
   <% end %>
-</ul>
+
+  <nav id="global-nav">
+    <ul>
+    <% if current_administrator.present? %>
+      <li><%= link_to '座席', admin_players_path %></li>
+      <li><%= link_to '選手', admin_players_path %></li>
+      <li><a href="#">投票</a></li>
+      <li><%= link_to 'ユーザ一覧', admin_players_path %></li>
+      <li><%= link_to '設定', admin_players_path %></li>
+      <li><%= link_to 'ログアウト', destroy_administrator_session_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to 'ログイン', new_administrator_session_path %></li>
+      <li><%= link_to 'ユーザー登録', new_administrator_registration_path %></li>
+    <% end %>
+    </ul>
+  </nav>
+</header>

@@ -1,8 +1,0 @@
-<h1>詳細画面</h1>
-  <div class="col-xs-10 col-xs-offset-1">
-    <p>座席名：<%= @seat.name %></p>
-    <p>価格：¥<%= @seat.price %></p>
-    <p>球場名：<%= @seat.ballpark.name %></p>
-    <p><%= link_to '一覧へ戻る', seats_path, class: 'btn btn-default' %>
-       <%= link_to '編集する', edit_seat_path(@seat), class: 'btn btn-info' %></p>
-  </div>
