@@ -9,7 +9,11 @@
 </head>
 <body>
 
-<%= render 'layouts/normal/header' %>
+<% if resource_name == :administrator %>
+  <%= render 'layouts/admin/header' %>
+<% else %>
+  <%= render 'layouts/normal/header' %>
+<% end %>
 
 <p class="bg-success"><%= notice %></p>
 <p class="bg-danger"><%= alert %></p>
