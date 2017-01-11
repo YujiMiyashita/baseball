@@ -36,6 +36,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "bullet"
   gem 'web-console', '~> 2.0'
   gem 'rubocop', require: false
   gem 'spring'
