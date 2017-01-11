@@ -13,6 +13,6 @@
   <%= render 'offer_tickets', offer_tickets: @offer_tickets %>
   <%= link_to 'プロフィール編集', edit_normal_profile_path %>
 <% elsif @user != current_user %>
-  <%= render 'favorites/form', user: @user %>
+  <%= render 'normal/favorites/form', user: @user %>
   <%= render 'personal_talks/new', user: @user %>
 <% end %>

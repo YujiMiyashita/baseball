@@ -1,7 +1,13 @@
 <% unless user == current_user %>
   <% if current_user.favorite?(user) %>
-    <%= render partial: 'favorites/unfavorite_form', locals: { user: user } %>
+    <%= form_for([:normal, current_user.favorites.find_by(to_user_id: user.id)], method: :delete) do |f| %>
+      <%= f.hidden_field :to_user_id %>
+      <%= f.submit '★' %>
+    <% end %>
   <% else %>
-    <%= render partial: 'favorites/favorite_form', locals: { user: user } %>
+    <%= form_for([:normal, current_user.favorites.build(to_user_id: user.id)]) do |f| %>
+      <%= f.hidden_field :to_user_id %>
+      <%= f.submit '☆' %>
+    <% end %>
   <% end %>
 <% end %>
