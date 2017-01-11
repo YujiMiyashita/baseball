@@ -8,14 +8,14 @@ class Normal::UsersController < NormalController
 
   def show
     @user = User.find(params[:id])
-    redirect_to mypage_profile_path if @user == current_user
+    redirect_to mypage_normal_profile_path if @user == current_user
   end
 
   def mypage
     @user = current_user
     @offer_tickets = @user.offer_tickets
     if @user.profile.nil?
-      redirect_to new_profile_path, notice: 'プロフィールを投稿しましょう'
+      redirect_to new_normal_profile_path, notice: 'プロフィールを投稿しましょう'
     else
       render :show
     end
@@ -23,7 +23,7 @@ class Normal::UsersController < NormalController
 
   def new
     if @profile.present?
-      redirect_to edit_profile_path
+      redirect_to edit_normal_profile_path
     else
       @profile = Profile.new
     end
@@ -32,7 +32,7 @@ class Normal::UsersController < NormalController
   def create
     @profile = current_user.profile.build(profile_params)
     if @profile.save
-      redirect_to user_path(current_user), notice: 'プロフィールを更新しました'
+      redirect_to normal_user_path(current_user), notice: 'プロフィールを更新しました'
     else
       render :new
     end
@@ -43,7 +43,7 @@ class Normal::UsersController < NormalController
 
   def update
     if @profile.update(profile_params)
-      redirect_to user_path(current_user), notice: 'プロフィールを更新しました'
+      redirect_to normal_user_path(current_user), notice: 'プロフィールを更新しました'
     else
       render :edit
     end

@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     #フォローフォロワー
     resources :tribes, only: [:create, :destroy]
 
+    resources :favorites, only: [:create, :destroy]
+
+
 
     #ユーザ一覧
     resources :users, only: [:index, :show] do
@@ -80,7 +83,7 @@ Rails.application.routes.draw do
       resources :players
     end
 
-  
+
   end
 
   #letter_opener

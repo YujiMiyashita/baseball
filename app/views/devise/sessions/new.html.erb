@@ -24,9 +24,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= render "devise/shared/links" %>
-    <%= link_to 'Facebookログイン', user_facebook_omniauth_authorize_path, class: 'btn btn-info' %> |
-    <%= link_to 'Googleログイン', user_google_oauth2_omniauth_authorize_path, class: 'btn btn-info' %>
-  </div>
+  <% unless resource_name == :administrator %>
+    <div class="field">
+      <%= render "devise/shared/links" %>
+      <%= link_to 'Facebookログイン', user_facebook_omniauth_authorize_path, class: 'btn btn-info' %> |
+      <%= link_to 'Googleログイン', user_google_oauth2_omniauth_authorize_path, class: 'btn btn-info' %>
+    </div>
+  <% end %>
 </div>

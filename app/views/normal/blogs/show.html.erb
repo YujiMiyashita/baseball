@@ -5,7 +5,7 @@
 </div>
 
 <div class="text">
-  <strong>投稿者:</strong> <%= link_to @blog.user.profile.nick_name, user_path(@blog.user) %>
+  <strong>投稿者:</strong> <%= link_to @blog.user.profile.nick_name, normal_user_path(@blog.user) %>
 </div>
 
 <div class="text">
@@ -14,8 +14,8 @@
 
 <div class="text">
   <% if @blog.user == current_user %>
-    <%= link_to '日記を編集する', edit_blog_path(@blog), class: 'btn btn-info' %>
-    <%= link_to '日記を削除する', @blog, method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-danger' %>
+    <%= link_to '日記を編集する', edit_normal_blog_path(@blog), class: 'btn btn-info' %>
+    <%= link_to '日記を削除する', normal_blog_path(@blog), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-danger' %>
   <% end %>
-  <p><%= link_to '一覧へ戻る', blogs_path, class: 'btn btn-default' %></p>
+  <p><%= link_to '一覧へ戻る', normal_blogs_path, class: 'btn btn-default' %></p>
 </div>

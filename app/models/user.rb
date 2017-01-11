@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
   has_many :personal_talk_messages, dependent: :destroy
   #チケット
   has_many :tickets, dependent: :destroy
+  #ブログ
+  has_many :blogs, dependent: :destroy
   #勧誘
   has_many :invitations, dependent: :destroy
   has_many :offer_tickets, through: :invitations, source: :ticket
@@ -92,11 +94,11 @@ class User < ActiveRecord::Base
   end
 
   def favorite?(user)
-    favorites.find_by(to_user_id: user.id)
+    favorites.find_by(to_user_id: user.id).present?
   end
 
   def follow?(user)
-    tribes.find_by(followed_id: user.id)
+    tribes.find_by(followed_id: user.id).present?
   end
 
   def self.create_string

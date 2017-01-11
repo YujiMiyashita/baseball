@@ -17,11 +17,10 @@ class Normal::BlogsController < NormalController
   end
 
   def create
-    @blog = Blog.new(blog_params)
-    @blog.user_id = current_user.id
+    @blog = current_user.blogs.build(blog_params)
 
     if @blog.save
-      redirect_to @blog, notice: 'Blog was successfully created.'
+      redirect_to normal_blog_url(@blog), notice: 'Blog was successfully created.'
     else
       render :new
     end
@@ -29,7 +28,7 @@ class Normal::BlogsController < NormalController
 
   def update
     if @blog.update(blog_params)
-      redirect_to @blog, notice: 'Blog was successfully updated.'
+      redirect_to normal_blog_url(@blog), notice: 'Blog was successfully updated.'
     else
       render :edit
     end
@@ -37,7 +36,7 @@ class Normal::BlogsController < NormalController
 
   def destroy
     @blog.destroy
-    redirect_to blogs_url, notice: 'Blog was successfully destroyed.'
+    redirect_to normal_blogs_url, notice: 'Blog was successfully destroyed.'
   end
 
   private
