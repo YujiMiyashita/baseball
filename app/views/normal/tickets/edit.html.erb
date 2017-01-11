@@ -1,6 +1,6 @@
 <h1>チケット編集</h1>
 
-<%= form_for(@ticket) do |f| %>
+<%= form_for([:normal, @ticket]) do |f| %>
 
   <div class="field">
     <%= f.label :playball %>

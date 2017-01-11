@@ -1,7 +1,13 @@
 <% unless user == current_user %>
   <% if current_user.follow?(user) %>
-    <%= render partial: 'tribes/unfollow_form', locals: { user: user } %>
+    <%= form_for([:normal, current_user.tribes.find_by(followed_id: user.id)], method: :delete) do |f| %>
+      <%= f.hidden_field :followed_id %>
+      <%= f.submit 'フォロー解除', class: 'btn btn-danger btn-sm' %>
+    <% end %>
   <% else %>
-    <%= render partial: 'tribes/follow_form', locals: { user: user } %>
+    <%= form_for([:normal, current_user.tribes.build(followed_id: user.id)]) do |f| %>
+      <%= f.hidden_field :followed_id %>
+      <%= f.submit 'フォローする', class: 'btn btn-success btn-sm' %>
+    <% end %>
   <% end %>
 <% end %>

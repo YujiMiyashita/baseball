@@ -19,7 +19,7 @@
         <td><%= ticket.home.name %> vs <%= ticket.visitor.name %></td>
         <td><%= ticket.number %>枚</td>
         <td><%= ticket.post_end_at.strftime("%Y年%m月%d日 %H時%M分") %>まで</td>
-        <td><%= link_to '詳細を見る', draft_ticket_path(ticket), class: 'btn btn-default' %></td>
+        <td><%= link_to '詳細を見る', draft_normal_ticket_path(ticket), class: 'btn btn-default' %></td>
       </tr>
     <% end %>
   </tbody>

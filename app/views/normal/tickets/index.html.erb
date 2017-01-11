@@ -20,14 +20,15 @@
         <td><%= ticket.home.name %><br>
              vs <%= ticket.visitor.name %></td>
         <td><%= ticket.number %>枚</td>
-        <td><%= link_to ticket.user.profile.nick_name, user_path(ticket.user) %><br>
+        <td><%= link_to ticket.user.profile.nick_name, normal_user_path(ticket.user) %><br>
             <%= profile_img(ticket.user.profile) %></td>
         <td><%= ticket.post_end_at.strftime("%Y年%m月%d日") %>まで</td>
-        <td><%= link_to '詳細', ticket, class: 'btn btn-default' %></td>
+        <td><%= link_to '詳細', normal_ticket_path(ticket), class: 'btn btn-default' %></td>
         <td><%= invitation_ticket(ticket) unless current_user == ticket.user %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to '新規チケット', new_ticket_path, class: 'btn btn-info' %>
+<%= link_to '新規チケット', new_normal_ticket_path, class: 'btn btn-info' %> |
+<%= link_to '下書き一覧', draft_index_normal_tickets_path, class: 'btn btn-default' %>

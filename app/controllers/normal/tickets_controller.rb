@@ -2,7 +2,7 @@ class Normal::TicketsController < NormalController
   before_action :authenticate_user!
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :set_draft_ticket, only: [:draft, :draft_edit]
-  before_action :my_ticket, only: [:draft, :edit, :draft_edit, :update, :destroy]
+  before_action :except_other_ticket, only: [:draft, :edit, :draft_edit, :update, :destroy]
 
   def index
     @tickets = Ticket.index_all.valid.limit_bitween(Time.now)
@@ -13,7 +13,7 @@ class Normal::TicketsController < NormalController
   end
 
   def show
-    redirect_to draft_ticket_path(params[:id]) if @ticket.nil?
+    redirect_to normal_draft_ticket_path(params[:id]) if @ticket.nil?
   end
 
   def draft
@@ -32,10 +32,10 @@ class Normal::TicketsController < NormalController
   def registration
     if params[:draft].present?
       Ticket.update(params[:id], status: 0)
-      redirect_to draft_index_tickets_url, notice: 'チケットを下書き一覧に登録しました'
+      redirect_to draft_index_normal_tickets_url, notice: 'チケットを下書き一覧に登録しました'
     else
       Ticket.update(params[:id], status: 1)
-      redirect_to tickets_url, notice: 'チケットを本登録しました'
+      redirect_to normal_tickets_url, notice: 'チケットを本登録しました'
     end
   end
 
@@ -43,7 +43,7 @@ class Normal::TicketsController < NormalController
     @ticket = current_user.tickets.build(ticket_params)
 
     if @ticket.save
-      redirect_to draft_ticket_url(@ticket), notice: 'チケットを下書き登録しました'
+      redirect_to draft_normal_ticket_url(@ticket), notice: 'チケットを下書き登録しました'
     else
       render :new
     end
@@ -53,14 +53,14 @@ class Normal::TicketsController < NormalController
 
     if params[:commit] == '下書き保存する'
       if @ticket.update(ticket_params)
-        redirect_to draft_ticket_url(@ticket), notice: '下書きチケットを更新しました'
+        redirect_to draft_normal_ticket_url(@ticket), notice: '下書きチケットを更新しました'
       else
         render :draft_edit
       end
 
     else
       if @ticket.update(ticket_params)
-        redirect_to @ticket, notice: 'チケットを更新しました'
+        redirect_to normal_ticket_path(@ticket), notice: 'チケットを更新しました'
       else
         render :edit
       end
@@ -69,7 +69,7 @@ class Normal::TicketsController < NormalController
 
   def destroy
     @ticket.destroy
-    redirect_to tickets_url, notice: 'チケットを削除しました'
+    redirect_to normal_tickets_url, notice: 'チケットを削除しました'
   end
 
   private
@@ -78,8 +78,8 @@ class Normal::TicketsController < NormalController
     @ticket = Ticket.find(params[:id])
   end
 
-  def my_ticket
-    redirect_to tickets_url unless @ticket.user == current_user
+  def except_other_ticket
+    redirect_to normal_tickets_url unless @ticket.user == current_user
   end
 
   def set_draft_ticket

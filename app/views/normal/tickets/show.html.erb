@@ -5,8 +5,8 @@
   <p>掲載期間：<%= @ticket.post_start_at.strftime("%Y年%m月%d日") %>〜<%= @ticket.post_end_at.strftime("%Y年%m月%d日") %></p>
 
   <% if @ticket.user == current_user %>
-    <p><%= link_to '編集する', edit_ticket_path(@ticket), class: 'btn btn-info' %>
-       <%= link_to '削除する', @ticket, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-       <%= button_to '下書きに登録する', registration_ticket_path(@ticket), method: :patch, class: 'btn btn-success', name: 'draft' %></p>
-    <p><%= link_to 'チケット一覧', tickets_path, class: 'btn btn-default' %></p>
+    <p><%= link_to '編集する', edit_normal_ticket_path(@ticket), class: 'btn btn-info' %>
+       <%= link_to '削除する', normal_ticket_path(@ticket), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+       <%= button_to '下書きに登録する', registration_normal_ticket_path(@ticket), method: :patch, class: 'btn btn-success', name: 'draft' %></p>
+    <p><%= link_to 'チケット一覧', normal_tickets_path, class: 'btn btn-default' %></p>
   <% end %>

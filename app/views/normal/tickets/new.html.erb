@@ -1,6 +1,6 @@
 <h2>チケット登録</h2>
 
-<%= form_for(@ticket, url: draft_create_tickets_path) do |f| %>
+<%= form_for([:normal, @ticket], url: draft_create_normal_tickets_path) do |f| %>
 
   <div class="field">
     <%= f.label :playball %>

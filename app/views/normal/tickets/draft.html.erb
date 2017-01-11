@@ -4,5 +4,5 @@
 <p><%= @ticket.home.name %> vs <%= @ticket.visitor.name %></p>
 <p><%= @ticket.number %>枚</p>
 <p>掲載期間：<%= @ticket.post_start_at.strftime("%Y年%m月%d日") %>〜<%= @ticket.post_end_at.strftime("%Y年%m月%d日") %></p>
-<p><%= button_to '本登録する', registration_ticket_path(@ticket), method: :patch, class: 'btn btn-success' %>
-   <%= link_to '編集する', draft_edit_ticket_path(@ticket), class: 'btn btn-default' %></p>
+<p><%= button_to '本登録する', registration_normal_ticket_path(@ticket), method: :patch, class: 'btn btn-success' %>
+   <%= link_to '編集する', draft_edit_normal_ticket_path(@ticket), class: 'btn btn-default' %></p>
