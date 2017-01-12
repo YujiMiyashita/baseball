@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   scope :index_all, -> {
     select(:id, :user_name, :created_at)
     .order(created_at: :asc)
+    .includes(:profile)
   }
 
   paginates_per 20
