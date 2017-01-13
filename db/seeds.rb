@@ -13,6 +13,8 @@ pacific_leacue.each do |team, ballpark|
   Ballpark.create(name: ballpark, team_id: team.id)
 end
 
+Player.create(name: '田中広輔', team_id: 1)
+
 100.times do |user|
   user = User.create(
     user_name: Faker::Name.name,
@@ -26,6 +28,7 @@ end
     user_id: user.id,
     content: 'よろしくお願いいたします',
     team_id: 1,
-    ballpark_id: 1
+    ballpark_id: 1,
+    player_id: 1
   )
 end

@@ -87,6 +87,6 @@ class Normal::TicketsController < NormalController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:playball, :ballpark_id, :visitor_id, :home_id, :number, :post_start_at, :post_end_at)
+    params.require(:ticket).permit(:playball, :ballpark_id, :visitor_id, :home_id, :number, :post_end_at)
   end
 end

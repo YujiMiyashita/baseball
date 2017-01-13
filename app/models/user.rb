@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   has_many :pennant_races
 
   #チケット申し込み
-  has_many :offers, dependent: :destroy, class_name: 'Offer', dependent: :destroy
+  has_many :offers, class_name: 'Offer', dependent: :destroy
   has_many :offer_tickets, through: :offers, source: :ticket
 
   #チケット申込み履歴

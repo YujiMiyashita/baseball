@@ -8,7 +8,6 @@ class CreateTickets < ActiveRecord::Migration
       t.integer :home_id #開催チーム
       t.integer :seat_id #座席
       t.integer :number #枚数
-      t.datetime :post_start_at #掲載期間開始
       t.datetime :post_end_at #掲載期間終了
       t.integer :status, default: 0 #ステータス（0: 未交渉, 1: 交渉中, 2: 交渉完了, 3: 交渉決裂）
       t.string :detail #備考

@@ -229,12 +229,11 @@ ActiveRecord::Schema.define(version: 20170113073907) do
     t.integer  "home_id"
     t.integer  "seat_id"
     t.integer  "number"
-    t.datetime "post_start_at"
     t.datetime "post_end_at"
-    t.integer  "status",        default: 0
+    t.integer  "status",      default: 0
     t.string   "detail"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "tickets", ["ballpark_id"], name: "index_tickets_on_ballpark_id", using: :btree
