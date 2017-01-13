@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113073907) do
+ActiveRecord::Schema.define(version: 20170113064232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,22 +99,12 @@ ActiveRecord::Schema.define(version: 20170113073907) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "offer_histroys", force: :cascade do |t|
+  create_table "offers", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "ticket_id"
     t.integer  "status",     default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-  end
-
-  add_index "offer_histroys", ["ticket_id"], name: "index_offer_histroys_on_ticket_id", using: :btree
-  add_index "offer_histroys", ["user_id"], name: "index_offer_histroys_on_user_id", using: :btree
-
-  create_table "offers", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "ticket_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   add_index "offers", ["ticket_id"], name: "index_offers_on_ticket_id", using: :btree
@@ -284,8 +274,6 @@ ActiveRecord::Schema.define(version: 20170113073907) do
   add_foreign_key "group_talk_members", "users"
   add_foreign_key "group_talk_messages", "group_talks"
   add_foreign_key "group_talk_messages", "users"
-  add_foreign_key "offer_histroys", "tickets"
-  add_foreign_key "offer_histroys", "users"
   add_foreign_key "offers", "tickets"
   add_foreign_key "offers", "users"
   add_foreign_key "pennant_races", "users"

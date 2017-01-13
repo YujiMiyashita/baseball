@@ -24,7 +24,7 @@
             <%= profile_img(ticket.user.profile) %></td>
         <td><%= ticket.post_end_at.strftime("%Y年%m月%d日") %>まで</td>
         <td><%= link_to '詳細', normal_ticket_path(ticket), class: 'btn btn-default' %></td>
-        <td><%= render 'normal/offers/form', { ticket: ticket } unless current_user == ticket.user %></td>
+        <td><%= ticket_status(ticket) unless current_user == ticket.user %></td>
       </tr>
     <% end %>
   </tbody>

@@ -13,6 +13,9 @@ module Baseball
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
 
+    #runnerでバッチ処理
+    config.autoload_paths += Dir["#{config.root}/lib"]
+
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
   end
