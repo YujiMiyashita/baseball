@@ -27,12 +27,16 @@ class User < ActiveRecord::Base
   has_many :tickets, dependent: :destroy
   #ブログ
   has_many :blogs, dependent: :destroy
-  #勧誘
-  has_many :invitations, dependent: :destroy
-  has_many :offer_tickets, through: :invitations, source: :ticket
-
   #順位予想
   has_many :pennant_races
+
+  #チケット申し込み
+  has_many :offers, dependent: :destroy, class_name: 'Offer', dependent: :destroy
+  has_many :offer_tickets, through: :offers, source: :ticket
+
+  #チケット申込み履歴
+  has_many :offer_histories, class_name: 'OfferHistroy', dependent: :destroy
+  has_many :offer_ticket_histories, through: :offer_histories, source: :ticket
 
   scope :index_all, -> {
     select(:id, :user_name, :created_at)

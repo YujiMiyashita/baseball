@@ -38,7 +38,7 @@ Rails.application.routes.draw do
         patch :registration
       end
 
-      resources :invitations, only: [:create, :destroy]
+      resources :offers, only: [:create, :destroy]
     end
 
     #投票

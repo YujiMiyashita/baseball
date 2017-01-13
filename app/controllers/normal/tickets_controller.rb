@@ -5,7 +5,7 @@ class Normal::TicketsController < NormalController
   before_action :except_other_ticket, only: [:draft, :edit, :draft_edit, :update, :destroy]
 
   def index
-    @tickets = Ticket.index_all.valid.limit_bitween(Time.now)
+    @tickets = Ticket.index_all.valid
   end
 
   def draft_index

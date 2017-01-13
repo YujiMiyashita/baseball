@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170102025910) do
+ActiveRecord::Schema.define(version: 20170113073907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20170102025910) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "invitations", force: :cascade do |t|
+  create_table "offer_histroys", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "ticket_id"
     t.integer  "status",     default: 0
@@ -107,8 +107,18 @@ ActiveRecord::Schema.define(version: 20170102025910) do
     t.datetime "updated_at",             null: false
   end
 
-  add_index "invitations", ["ticket_id"], name: "index_invitations_on_ticket_id", using: :btree
-  add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
+  add_index "offer_histroys", ["ticket_id"], name: "index_offer_histroys_on_ticket_id", using: :btree
+  add_index "offer_histroys", ["user_id"], name: "index_offer_histroys_on_user_id", using: :btree
+
+  create_table "offers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "ticket_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "offers", ["ticket_id"], name: "index_offers_on_ticket_id", using: :btree
+  add_index "offers", ["user_id"], name: "index_offers_on_user_id", using: :btree
 
   create_table "pennant_races", force: :cascade do |t|
     t.boolean  "league"
@@ -230,11 +240,6 @@ ActiveRecord::Schema.define(version: 20170102025910) do
   add_index "tickets", ["ballpark_id"], name: "index_tickets_on_ballpark_id", using: :btree
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id", using: :btree
 
-  create_table "trades", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "tribes", force: :cascade do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
@@ -280,8 +285,10 @@ ActiveRecord::Schema.define(version: 20170102025910) do
   add_foreign_key "group_talk_members", "users"
   add_foreign_key "group_talk_messages", "group_talks"
   add_foreign_key "group_talk_messages", "users"
-  add_foreign_key "invitations", "tickets"
-  add_foreign_key "invitations", "users"
+  add_foreign_key "offer_histroys", "tickets"
+  add_foreign_key "offer_histroys", "users"
+  add_foreign_key "offers", "tickets"
+  add_foreign_key "offers", "users"
   add_foreign_key "pennant_races", "users"
   add_foreign_key "personal_talk_members", "personal_talks"
   add_foreign_key "personal_talk_members", "users"

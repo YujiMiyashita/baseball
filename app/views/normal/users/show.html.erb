@@ -10,7 +10,6 @@
 <% end %>
 
 <% if @user == current_user %>
-  <%= render 'offer_tickets', offer_tickets: @offer_tickets %>
   <%= link_to 'プロフィール編集', edit_normal_profile_path %>
 <% elsif @user != current_user %>
   <%= render 'normal/favorites/form', user: @user %>
