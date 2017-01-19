@@ -11,6 +11,7 @@ gem 'bootstrap3-datetimepicker-rails'
 gem 'dotenv-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'whenever', require: false
 
 gem 'devise'
 gem 'omniauth'
