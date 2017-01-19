@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113064232) do
+ActiveRecord::Schema.define(version: 20170119052025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,18 @@ ActiveRecord::Schema.define(version: 20170113064232) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "ticket_id"
+    t.text     "content"
+    t.boolean  "status",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "notifications", ["ticket_id"], name: "index_notifications_on_ticket_id", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "offers", force: :cascade do |t|
     t.integer  "user_id"
@@ -274,6 +286,8 @@ ActiveRecord::Schema.define(version: 20170113064232) do
   add_foreign_key "group_talk_members", "users"
   add_foreign_key "group_talk_messages", "group_talks"
   add_foreign_key "group_talk_messages", "users"
+  add_foreign_key "notifications", "tickets"
+  add_foreign_key "notifications", "users"
   add_foreign_key "offers", "tickets"
   add_foreign_key "offers", "users"
   add_foreign_key "pennant_races", "users"
