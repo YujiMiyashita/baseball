@@ -2,13 +2,15 @@ class Normal::GroupTalksController < NormalController
   before_action :authenticate_user!
 
   def index
-    @group_talks = GroupTalk.all
+    @group_talks = current_user.group_talks
   end
 
   def show
-    @group_talk = current_user.group_talks.find(params[:id])
-    @messages = @group_talk.group_talk_messages.order(created_at: :asc)
-    @message = @group_talk.group_talk_messages.build
+    if current_user.group_talks.present?
+      @group_talk = current_user.group_talks.find(params[:id])
+      @messages = @group_talk.group_talk_messages.order(created_at: :asc)
+      @message = current_user.group_talk_messages.build(group_talk_id: @group_talk.id)
+    end
   end
 
   def new

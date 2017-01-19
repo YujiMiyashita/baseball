@@ -38,6 +38,9 @@ class User < ActiveRecord::Base
   has_many :offer_histories, class_name: 'OfferHistroy', dependent: :destroy
   has_many :offer_ticket_histories, through: :offer_histories, source: :ticket
 
+  #通知
+  has_many :notifications, dependent: :destroy
+
   scope :index_all, -> {
     select(:id, :user_name, :created_at)
     .order(created_at: :asc)

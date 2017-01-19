@@ -10,8 +10,9 @@
 <% end %>
 
 <% if @user == current_user %>
-  <%= link_to 'プロフィール編集', edit_normal_profile_path %>
+  <%= link_to 'プロフィール編集', edit_normal_profile_path, class: 'btn btn-success' %>
+  <%= render 'normal/users/notification_index', notifications: @notifications %>
+  <%= render 'normal/group_talks/index', group_talks: @group_talks %>
 <% elsif @user != current_user %>
   <%= render 'normal/favorites/form', user: @user %>
-  <%= render 'personal_talks/new', user: @user %>
 <% end %>

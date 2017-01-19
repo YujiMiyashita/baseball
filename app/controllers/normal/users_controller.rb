@@ -13,11 +13,9 @@ class Normal::UsersController < NormalController
 
   def mypage
     @user = current_user
-    if @user.profile.nil?
-      redirect_to new_normal_profile_path, notice: 'プロフィールを投稿しましょう'
-    else
-      render :show
-    end
+    @notifications = current_user.notifications
+    @group_talks = current_user.group_talks
+    render :show
   end
 
   def new
