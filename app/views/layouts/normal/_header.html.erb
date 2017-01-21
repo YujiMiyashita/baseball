@@ -6,15 +6,28 @@
   <nav id="global-nav">
     <ul>
     <% if current_user.present? %>
-      <li><%= link_to 'チケット', normal_tickets_path %></li>
-      <li><%= link_to '観戦日記', normal_blogs_path %></li>
-      <li><a href="#">投票</a></li>
-      <li><%= link_to 'ユーザ一覧', normal_users_path %></li>
-      <li><%= link_to '設定', edit_user_registration_path %></li>
-      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+      <%= link_to normal_tickets_path do %>
+        <%= image_tag('menu-ticket.jpg') %>
+      <% end %>
+      <%= link_to normal_blogs_path do %>
+        <%= image_tag('menu-blog.jpg') %>
+      <% end %>
+      <%= link_to normal_users_path do %>
+        <%= image_tag('menu-user.jpg') %>
+      <% end %>
+      <%= link_to edit_user_registration_path do %>
+        <%= image_tag('menu-settings.jpg') %>
+      <% end %>
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <%= image_tag('menu-signout.jpg') %>
+      <% end %>
     <% else %>
-      <li><%= link_to 'ログイン', new_user_session_path %></li>
-      <li><%= link_to 'ユーザー登録', new_user_registration_path %></li>
+      <%= link_to new_user_session_path do %>
+        <%= image_tag('menu-signin.jpg') %>
+      <% end %>
+      <%= link_to new_user_registration_path do %>
+        <%= image_tag('menu-signup.jpg') %>
+      <% end %>
     <% end %>
     </ul>
   </nav>

@@ -35,9 +35,12 @@
 <div class="well"><%= simple_format(@profile.content) %></div>
 
 <% if @profile.user == current_user %>
-  <%= link_to 'プロフィール編集', edit_normal_profile_path, class: 'btn btn-success' %>
+  <%= link_to edit_normal_profile_path do %>
+		<i class="fa fa-cog fa-lg">プロフィール編集</i>
+	<% end %>
   <%= render 'normal/users/notification_index', notifications: @notifications %>
   <%= render 'normal/group_talks/index', group_talks: @group_talks %>
+	<%= render 'normal/users/favorite_blogs', favorite_blogs: @favorite_blogs %>
 <% elsif @profile.user != current_user %>
   <%= render 'normal/favorites/form', user: @profile %>
 <% end %>

@@ -1,13 +1,11 @@
-<% unless user == current_user %>
-  <% if current_user.favorite?(user) %>
-    <%= form_for([:normal, current_user.favorites.find_by(to_user_id: user.id)], method: :delete) do |f| %>
-      <%= f.hidden_field :to_user_id %>
-      <%= f.submit '★' %>
+<% unless blog.user == current_user %>
+  <% if current_user.favorites.find_by(blog_id: blog.id).present? %>
+    <%= link_to normal_blog_favorite_path(blog, current_user.favorites.find_by(blog_id: blog.id).id), method: :delete do %>
+      <i class="fa fa-star fa-3x"></i>
     <% end %>
   <% else %>
-    <%= form_for([:normal, current_user.favorites.build(to_user_id: user.id)]) do |f| %>
-      <%= f.hidden_field :to_user_id %>
-      <%= f.submit '☆' %>
+    <%= link_to normal_blog_favorites_path(blog), method: :post do %>
+      <i class="fa fa-star-o fa-3x"></i>
     <% end %>
   <% end %>
 <% end %>

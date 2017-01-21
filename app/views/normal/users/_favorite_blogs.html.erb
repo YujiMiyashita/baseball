@@ -1,0 +1,19 @@
+<h3 class="page-header"><a data-toggle="collapse" data-target="#demo">お気に入りのブログ</a></h3>
+
+<div id="demo" class="collapse">
+  <ul class="media-list">
+    <% @favorite_blogs.each do |blog| %>
+      <div class="col-xs-12 col-md-6">
+        <li class="media">
+      		<a class="media-left" href="#">
+      			<%= image_tag(blog.user.profile.image_url, size: "80x80") %>
+      		</a>
+      		<div class="media-body">
+      			<h4 class="media-heading"><%= link_to blog.title, normal_blog_path(blog) %></h4>
+      			<p><%= blog.created_at.strftime("%Y/%m/%d") %> Written by <%= link_to blog.user.profile.nick_name, normal_user_path(blog.user) %></p>
+      		</div>
+      	</li>
+      </div>
+  	<% end %>
+  </ul>
+</div>

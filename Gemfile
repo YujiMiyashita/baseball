@@ -18,6 +18,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'twitter-bootstrap-rails'
+gem "font-awesome-sass"
 gem 'autosize-rails'
 gem 'carrierwave'
 gem 'rmagick'

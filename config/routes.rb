@@ -13,10 +13,6 @@ Rails.application.routes.draw do
     #フォローフォロワー
     resources :tribes, only: [:create, :destroy]
 
-    resources :favorites, only: [:create, :destroy]
-
-
-
     #ユーザ一覧
     resources :users, only: [:index, :show] do
       get :get_player, on: :collection
@@ -48,7 +44,9 @@ Rails.application.routes.draw do
     end
 
     #観戦日記
-    resources :blogs
+    resources :blogs do
+      resources :favorites, only: [:create, :destroy]
+    end
 
     #個人トーク機能
     resources :personal_talks do

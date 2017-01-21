@@ -5,10 +5,8 @@ class User < ActiveRecord::Base
   #プロフィール
   has_one :profile, dependent: :destroy
   #お気に入り
-  has_many :favorites, foreign_key: 'from_user_id', dependent: :destroy
-  has_many :reverse_favorites, foreign_key: 'to_user_id', class_name: 'Favorite', dependent: :destroy
-  has_many :favorite_users, through: :favorites, source: :to_user
-  has_many :favorited, through: :reverse_favorites, source: :from_user
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_blogs, through: :favorites, source: :blog
   #フォローフォロワー
   has_many :tribes, foreign_key: 'follower_id', dependent: :destroy
   has_many :reverse_tribes, foreign_key: 'followed_id', class_name: 'Tribe', dependent: :destroy

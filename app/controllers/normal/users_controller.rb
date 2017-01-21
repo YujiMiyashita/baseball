@@ -16,6 +16,7 @@ class Normal::UsersController < NormalController
     @profile = current_user.profile
     @notifications = current_user.notifications
     @group_talks = current_user.group_talks
+    @favorite_blogs = current_user.favorite_blogs
     render :show
   end
 

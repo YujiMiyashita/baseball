@@ -1,12 +1,27 @@
-<h1>詳細画面</h1>
+
+<div class="jumbotron">
+  <h2 class="page-header"><%= @ticket.home.name %>公式戦</h2>
   <p><%= @ticket.playball.strftime("%Y年%m月%d日 %H:%M PLAYBALL") %> at <%= @ticket.ballpark.name %></p>
-  <p><%= @ticket.home.name %> vs <%= @ticket.visitor.name %></p>
+  <p> vs <%= @ticket.visitor.name %></p>
   <p><%= @ticket.number %>枚</p>
   <p>掲載期間：<%= @ticket.post_end_at.strftime("%Y年%m月%d日") %>まで</p>
+</div>
 
   <% if @ticket.user == current_user %>
-    <p><%= link_to '編集する', edit_normal_ticket_path(@ticket), class: 'btn btn-info' %>
-       <%= link_to '削除する', normal_ticket_path(@ticket), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-       <%= button_to '下書きに登録する', registration_normal_ticket_path(@ticket), method: :patch, class: 'btn btn-success', name: 'draft' %></p>
-    <p><%= link_to 'チケット一覧', normal_tickets_path, class: 'btn btn-default' %></p>
+    <%= link_to edit_normal_ticket_path(@ticket) do %>
+      <i class="fa fa-pencil fa-lg">編集する</i>
+    <% end %>
+
+    <%= link_to normal_ticket_path(@ticket), method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <i class="fa fa-trash-o fa-lg">削除する</i>
+    <% end %>
+
+    <%= link_to registration_normal_ticket_path(@ticket), method: :patch do %>
+      <i class="fa fa-book fa-lg">下書き保存</i>
+    <% end %>
+
+    <%= link_to normal_tickets_path do %>
+      <i class="fa fa-ticket fa-lg">チケット一覧</i>
+    <% end %>
+
   <% end %>

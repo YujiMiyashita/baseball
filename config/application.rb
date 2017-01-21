@@ -13,6 +13,8 @@ module Baseball
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
 
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
+
     #runnerでバッチ処理
     config.autoload_paths += Dir["#{config.root}/lib"]
 

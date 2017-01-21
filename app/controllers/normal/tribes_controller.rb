@@ -3,11 +3,11 @@ class Normal::TribesController < NormalController
 
   def create
     @tribe = current_user.tribes.create(followed_id: params[:tribe][:followed_id])
-    redirect_to users_url, notice: "#{@tribe.followed.user_name}さんをフォローしました"
+    redirect_to normal_users_url, notice: "#{@tribe.followed.user_name}さんをフォローしました"
   end
 
   def destroy
     @tribe = current_user.tribes.find_by(followed_id: params[:tribe][:followed_id]).destroy
-    redirect_to users_url, notice: "#{@tribe.followed.user_name}さんをリムりました"
+    redirect_to normal_users_url, notice: "#{@tribe.followed.user_name}さんをリムりました"
   end
 end

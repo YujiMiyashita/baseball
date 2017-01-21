@@ -62,15 +62,15 @@ ActiveRecord::Schema.define(version: 20170119052025) do
   add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
-    t.integer  "from_user_id"
-    t.integer  "to_user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
+    t.integer  "blog_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "favorites", ["from_user_id", "to_user_id"], name: "index_favorites_on_from_user_id_and_to_user_id", unique: true, using: :btree
-  add_index "favorites", ["from_user_id"], name: "index_favorites_on_from_user_id", using: :btree
-  add_index "favorites", ["to_user_id"], name: "index_favorites_on_to_user_id", using: :btree
+  add_index "favorites", ["blog_id"], name: "index_favorites_on_blog_id", using: :btree
+  add_index "favorites", ["user_id", "blog_id"], name: "index_favorites_on_user_id_and_blog_id", unique: true, using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "group_talk_members", force: :cascade do |t|
     t.integer  "user_id"
@@ -282,6 +282,8 @@ ActiveRecord::Schema.define(version: 20170119052025) do
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
   add_foreign_key "blogs", "users"
+  add_foreign_key "favorites", "blogs"
+  add_foreign_key "favorites", "users"
   add_foreign_key "group_talk_members", "group_talks"
   add_foreign_key "group_talk_members", "users"
   add_foreign_key "group_talk_messages", "group_talks"

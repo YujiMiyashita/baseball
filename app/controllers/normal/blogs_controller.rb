@@ -3,7 +3,7 @@ class Normal::BlogsController < NormalController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
 
   def index
-    @blogs = Blog.index_all
+    @blogs = Blog.index_all.includes(:user)
   end
 
   def show
