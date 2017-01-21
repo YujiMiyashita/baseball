@@ -1,9 +1,9 @@
 <h2><%= @user.profile.nick_name %>　<%= profile_img(@user.profile) %></h2>
 
 <% if @user.profile.present? %>
-  <p>好きな球団：<%= @user.profile.team.name %></p>
-  <p>好きな選手：<%= @user.profile.player.name %></p>
-  <p>よく行く球場：<%= @user.profile.ballpark.name %></p>
+  <p>好きな球団：<%= @user.profile.team.try(:name) %></p>
+  <p>好きな選手：<%= @user.profile.player.try(:name) %></p>
+  <p>よく行く球場：<%= @user.profile.ballpark.try(:name) %></p>
   <p><%= simple_format(@user.profile.content) %></p>
 <% else %>
   <p>プロフィールがまだ登録されていません</p>
