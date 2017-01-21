@@ -83,7 +83,7 @@ class Normal::TicketsController < NormalController
   end
 
   def set_draft_ticket
-    @ticket = Ticket.find_by(id: params[:id], status: 0, user_id: current_user.id)
+    @ticket = current_user.tickets.find(params[:id])
   end
 
   def ticket_params
