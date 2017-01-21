@@ -7,12 +7,13 @@ class Normal::UsersController < NormalController
   end
 
   def show
-    @user = User.find(params[:id])
-    redirect_to mypage_normal_profile_path if @user == current_user
+    user = User.find(params[:id])
+    @profile = user.profile
+    redirect_to mypage_normal_profile_path if @profile.user == current_user
   end
 
   def mypage
-    @user = current_user
+    @profile = current_user.profile
     @notifications = current_user.notifications
     @group_talks = current_user.group_talks
     render :show

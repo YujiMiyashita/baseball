@@ -1,11 +1,18 @@
 <h1>観戦日記</h1>
 
-<% @blogs.each do |blog| %>
-  <div class="timeline">
-    <h3><%= link_to blog.title, normal_blog_path(blog) %></h3>
-    <p><%= image_tag(blog.image, width: 300, height: 200) if blog.image? %></p>
-    <p>Written by <%= link_to blog.user.profile.nick_name, normal_user_path(blog.user) %></p>
-  </div>
-<% end %>
-
 <p><%= link_to 'New Blog', new_normal_blog_path, class: 'btn btn-default' %></p>
+
+<ul class="media-list">
+  <% @blogs.each do |blog| %>
+	<li class="media">
+		<a class="media-left" href="#">
+			<%= image_tag(blog.user.profile.image_url, size: "80x80") %>
+		</a>
+		<div class="media-body">
+			<h4 class="media-heading"><%= link_to blog.title, normal_blog_path(blog) %></h4>
+			<p>Written by <%= link_to blog.user.profile.nick_name, normal_user_path(blog.user) %></p>
+      <p><%= blog.created_at.strftime("%Y/%m/%d") %></p>
+		</div>
+	</li>
+  <% end %>
+</ul>

@@ -1,14 +1,19 @@
-<h3>観戦メンバートーク</h3>
+<h3 class="page-header">観戦メンバートーク</h3>
 
 <% if @group_talks.present? %>
   <% @group_talks.each do |group| %>
-    <p><%= link_to group.name, normal_group_talk_path(group), class: 'btn btn-default' %><p>
-    <p>メンバー：<% group.users.each do |member| %>
-      <%= member.profile.nick_name %>
-      <%= profile_img(member.profile) %>
-     <% end %><p>
+    <div class="panel panel-success">
+    	<div class="panel-heading">
+    		<%= link_to group.name, normal_group_talk_path(group) %>
+    	</div>
+    	<div class="panel-body">
+        <p>メンバー：<% group.users.each do |member| %>
+          <%= member.profile.nick_name %>
+          <%= profile_img(member.profile) %>
+         <% end %><p>
+    	</div>
+    </div>
   <% end %>
-
 <% else %>
   <p>グループはまだありません</p>
 <% end %>

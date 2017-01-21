@@ -15,8 +15,11 @@
   <%= render 'layouts/normal/header' %>
 <% end %>
 
-<p class="bg-success"><%= notice %></p>
-<p class="bg-danger"><%= alert %></p>
+<% if notice.present? %>
+  <div class="alert alert-success" role="alert"><%= notice %></div>
+<% elsif alert.present? %>
+  <div class="alert alert-danger" role="alert"><%= alert %></div>
+<% end %>
 
 <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
   <%= yield %>
