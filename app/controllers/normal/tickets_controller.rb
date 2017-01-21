@@ -5,11 +5,11 @@ class Normal::TicketsController < NormalController
   before_action :except_other_ticket, only: [:draft, :edit, :draft_edit, :update, :destroy]
 
   def index
-    @tickets = Ticket.index_all
+    @tickets = Ticket.index_all.limit_bitween
   end
 
   def draft_index
-    @tickets = Ticket.index_all.disabled.my_ticket(current_user)
+    @tickets = Ticket.index_all.my_ticket(current_user)
   end
 
   def show

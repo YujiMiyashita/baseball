@@ -13,9 +13,8 @@ class Ticket < ActiveRecord::Base
     .order(created_at: :desc)
   }
 
-  scope :limit_bitween, -> current_time {
-    where('post_start_at <= ?', current_time).
-    where('post_end_at >= ?', current_time)
+  scope :limit_bitween, -> {
+    where('post_end_at >= ?', Date.today)
   }
 
   scope :my_ticket, -> user {
