@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def ticket_status(ticket)
-    if ticket.post_end_at < Time.now
+    if ticket.post_end_at <= Date.yesterday
       if ticket.offer_users.present?
         '抽選中'
       end
