@@ -23,7 +23,7 @@ class Ticket < ActiveRecord::Base
   }
 
   scope :limit_bitween, -> {
-    where('post_end_at >= ?', Date.today)
+    where('post_end_at >= ?', Date.tomorrow)
   }
 
   scope :my_ticket, -> user {

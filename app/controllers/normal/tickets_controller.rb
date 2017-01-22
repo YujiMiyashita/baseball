@@ -5,10 +5,12 @@ class Normal::TicketsController < NormalController
   before_action :except_other_ticket, only: [:draft, :edit, :draft_edit, :update, :destroy]
 
   def index
+    binding.pry
     @tickets = Ticket.index_all.limit_bitween.where(status: 1)
   end
 
   def draft_index
+
     @tickets = Ticket.index_all.my_ticket(current_user).where(status: 0)
   end
 
