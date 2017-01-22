@@ -19,11 +19,11 @@ class Ticket < ActiveRecord::Base
   scope :index_all, -> {
     select(:id, :playball, :user_id, :ballpark_id, :visitor_id, :home_id,
     :seat_id, :number, :post_end_at, :detail, :created_at, :status)
-    .order(created_at: :desc)
+    .order(post_end_at: :desc)
   }
 
   scope :limit_bitween, -> {
-    where('post_end_at >= ?', Date.tomorrow)
+    where('post_end_at >= ?', Date.yesterday)
   }
 
   scope :my_ticket, -> user {
