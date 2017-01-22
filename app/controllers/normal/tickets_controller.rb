@@ -5,18 +5,19 @@ class Normal::TicketsController < NormalController
   before_action :except_other_ticket, only: [:draft, :edit, :draft_edit, :update, :destroy]
 
   def index
-    @tickets = Ticket.index_all.limit_bitween
+    @tickets = Ticket.index_all.limit_bitween.where(status: 1)
   end
 
   def draft_index
-    @tickets = Ticket.index_all.my_ticket(current_user)
+    @tickets = Ticket.index_all.my_ticket(current_user).where(status: 0)
   end
 
   def show
-    redirect_to normal_draft_ticket_path(params[:id]) if @ticket.nil?
+    redirect_to draft_normal_ticket_path(params[:id]) if @ticket.nil?
   end
 
   def draft
+    @ticket = Ticket.find_by(id: params[:id], status: 0)
   end
 
   def new
@@ -30,7 +31,7 @@ class Normal::TicketsController < NormalController
   end
 
   def registration
-    if params[:draft].present?
+    if params[:draft] == ""
       Ticket.update(params[:id], status: 0)
       redirect_to draft_index_normal_tickets_url, notice: 'チケットを下書き一覧に登録しました'
     else
@@ -75,7 +76,7 @@ class Normal::TicketsController < NormalController
   private
 
   def set_ticket
-    @ticket = Ticket.find(params[:id])
+    @ticket = Ticket.find_by(id: params[:id], status: 1)
   end
 
   def except_other_ticket

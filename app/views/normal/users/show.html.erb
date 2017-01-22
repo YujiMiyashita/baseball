@@ -41,6 +41,4 @@
   <%= render 'normal/users/notification_index', notifications: @notifications %>
   <%= render 'normal/group_talks/index', group_talks: @group_talks %>
 	<%= render 'normal/users/favorite_blogs', favorite_blogs: @favorite_blogs %>
-<% elsif @profile.user != current_user %>
-  <%= render 'normal/favorites/form', user: @profile %>
 <% end %>

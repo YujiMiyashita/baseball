@@ -1,11 +1,14 @@
 <h2 class="page-header"><%= @blog.title %></h2>
 
-<div class="text">
-  <%= simple_format(@blog.content) %>
-</div>
 
-<div class="text">
-  <strong>投稿者:</strong> <%= link_to @blog.user.profile.nick_name, normal_user_path(@blog.user) %>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h4><%= @blog.created_at.strftime("%Y-%m-%d") %> Written by <%= link_to @blog.user.profile.nick_name, normal_user_path(@blog.user) %></h4>
+	</div>
+	<div class="panel-body">
+    <p><%= simple_format(@blog.content) %></p>
+    <p></p>
+	</div>
 </div>
 
 <div class="text">
@@ -14,8 +17,16 @@
 
 <div class="text">
   <% if @blog.user == current_user %>
-    <%= link_to '日記を編集する', edit_normal_blog_path(@blog), class: 'btn btn-info' %>
-    <%= link_to '日記を削除する', normal_blog_path(@blog), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-danger' %>
+    <p><%= button_to edit_normal_blog_path(@blog), method: :get, class: 'btn btn-default' do %>
+      <i class="fa fa-book fa-lg"></i>編集
+    <% end %></p>
+
+    <p><%= button_to normal_blog_path(@blog), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-danger' do %>
+      <i class="fa fa-book fa-lg"></i>削除
+    <% end %></p>
   <% end %>
-  <p><%= link_to '一覧へ戻る', normal_blogs_path, class: 'btn btn-default' %></p>
+
+  <p><%= button_to normal_blogs_path, method: :get, class: 'btn btn-info' do %>
+    <i class="fa fa-book fa-lg"></i>一覧へ
+  <% end %></p>
 </div>

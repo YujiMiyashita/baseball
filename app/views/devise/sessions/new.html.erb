@@ -26,9 +26,13 @@
 
   <% unless resource_name == :administrator %>
     <div class="field">
-      <%= render "devise/shared/links" %>
-      <%= link_to 'Facebookログイン', user_facebook_omniauth_authorize_path, class: 'btn btn-info' %> |
-      <%= link_to 'Googleログイン', user_google_oauth2_omniauth_authorize_path, class: 'btn btn-info' %>
+      <%= link_to user_facebook_omniauth_authorize_path do %>
+        <i class="fa fa-facebook-official fa-3x"></i>
+      <% end %>
+      <%= link_to user_google_oauth2_omniauth_authorize_path do %>
+        <i class="fa fa-google fa-3x"></i>
+      <% end %>
+      <p><%= render "devise/shared/links" %></p>
     </div>
   <% end %>
 </div>

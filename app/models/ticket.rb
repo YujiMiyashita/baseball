@@ -4,6 +4,15 @@ class Ticket < ActiveRecord::Base
   belongs_to :visitor, class_name: 'Team'
   belongs_to :home, class_name: 'Team'
 
+  validates :playball,    presence: true
+  validates :user_id,     presence: true
+  validates :ballpark,    presence: true
+  validates :visitor_id,  presence: true
+  validates :home_id,     presence: true
+  validates :number,      presence: true
+  validates :post_end_at, presence: true
+  validates :status,      presence: true
+
   has_many :reverse_offers, class_name: 'Offer', foreign_key: 'ticket_id', dependent: :destroy
   has_many :offer_users, through: :reverse_offers, source: :user
 

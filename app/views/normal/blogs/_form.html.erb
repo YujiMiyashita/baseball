@@ -29,9 +29,12 @@
     <%= f.hidden_field :image_cache %>
   </div>
 
-  <div class="action">
-    <%= f.submit '日記を保存する', class: 'btn btn-success' %>
-    <%= link_to '日記一覧へ戻る', normal_blogs_path, class: 'btn btn-default' %>
-  </div>
+  <p><%= button_tag type: "submit", class: "btn btn-default" do %>
+    <i class="fa fa-search fa-lg"></i>登録する
+  <% end %><p>
+
+  <p><%= button_to normal_blogs_path, method: :get, class: 'btn btn-info' do %>
+    <i class="fa fa-book fa-lg"></i>一覧
+  <% end %></p>
 
 <% end %>

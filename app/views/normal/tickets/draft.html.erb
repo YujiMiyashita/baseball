@@ -1,8 +1,39 @@
-<h2 class="page-header">チケット下書き</h2>
+<h2 class="page-header">下書き</h2>
 
-<p><%= @ticket.playball.strftime("%Y年%m月%d日 %H:%M PLAYBALL") %> at <%= @ticket.ballpark.name %></p>
-<p><%= @ticket.home.name %> vs <%= @ticket.visitor.name %></p>
-<p><%= @ticket.number %>枚</p>
-<p>掲載期間：<%= @ticket.post_end_at.strftime("%Y年%m月%d日") %>まで</p>
-<p><%= button_to '本登録する', registration_normal_ticket_path(@ticket), method: :patch, class: 'btn btn-success' %>
-   <%= link_to '編集する', draft_edit_normal_ticket_path(@ticket), class: 'btn btn-default' %></p>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4>PLAYBALL</h4>
+	</div>
+	<div class="panel-body">
+		<p><%= @ticket.playball.strftime("%Y年%m月%d日 %H:%M PLAYBALL") %> at <%= @ticket.ballpark.name %></p>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4>対戦</h4>
+	</div>
+	<div class="panel-body">
+		<p><%= @ticket.home.name %> vs <%= @ticket.visitor.name %></p>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4>枚数と掲載期間</h4>
+	</div>
+	<div class="panel-body">
+    <p><%= @ticket.number %>枚</p>
+    <p><%= @ticket.post_end_at.strftime("%Y年%m月%d日") %>まで</p>
+	</div>
+</div>
+
+
+
+<p><%= button_to draft_edit_normal_ticket_path(@ticket), method: :get, class: 'btn btn-default' do %>
+  <i class="fa fa-book fa-lg">編集</i>
+<% end %></p>
+
+<p><%= button_to registration_normal_ticket_path(@ticket), method: :patch, class: 'btn btn-success' do %>
+  <i class="fa fa-book fa-lg">本登録</i>
+<% end %></p>

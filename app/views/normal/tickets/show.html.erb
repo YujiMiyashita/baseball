@@ -1,27 +1,47 @@
+<h2 class="page-header">詳細</h2>
 
-<div class="jumbotron">
-  <h2 class="page-header"><%= @ticket.home.name %>公式戦</h2>
-  <p><%= @ticket.playball.strftime("%Y年%m月%d日 %H:%M PLAYBALL") %> at <%= @ticket.ballpark.name %></p>
-  <p> vs <%= @ticket.visitor.name %></p>
-  <p><%= @ticket.number %>枚</p>
-  <p>掲載期間：<%= @ticket.post_end_at.strftime("%Y年%m月%d日") %>まで</p>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h4>PLAYBALL</h4>
+	</div>
+	<div class="panel-body">
+		<p><%= @ticket.playball.strftime("%Y年%m月%d日 %H:%M PLAYBALL") %> at <%= @ticket.ballpark.name %></p>
+	</div>
 </div>
 
-  <% if @ticket.user == current_user %>
-    <%= link_to edit_normal_ticket_path(@ticket) do %>
-      <i class="fa fa-pencil fa-lg">編集する</i>
-    <% end %>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h4>対戦</h4>
+	</div>
+	<div class="panel-body">
+		<p><%= @ticket.home.name %> vs <%= @ticket.visitor.name %></p>
+	</div>
+</div>
 
-    <%= link_to normal_ticket_path(@ticket), method: :delete, data: { confirm: 'Are you sure?' } do %>
-      <i class="fa fa-trash-o fa-lg">削除する</i>
-    <% end %>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h4>枚数と掲載期間</h4>
+	</div>
+	<div class="panel-body">
+    <p><%= @ticket.number %>枚</p>
+    <p><%= @ticket.post_end_at.strftime("%Y年%m月%d日") %>まで</p>
+	</div>
+</div>
 
-    <%= link_to registration_normal_ticket_path(@ticket), method: :patch do %>
-      <i class="fa fa-book fa-lg">下書き保存</i>
-    <% end %>
+<% if @ticket.user == current_user %>
+  <p><%= button_to edit_normal_ticket_path(@ticket), method: :get, class: 'btn btn-default' do %>
+    <i class="fa fa-book fa-lg"></i>編集
+  <% end %></p>
 
-    <%= link_to normal_tickets_path do %>
-      <i class="fa fa-ticket fa-lg">チケット一覧</i>
-    <% end %>
+  <p><%= button_to normal_ticket_path(@ticket), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }  do %>
+    <i class="fa fa-trash-o fa-lg"></i>削除
+  <% end %></p>
 
-  <% end %>
+  <p><%= button_to registration_normal_ticket_path(@ticket), method: :patch, class: 'btn btn-default', name: 'draft' do %>
+    <i class="fa fa-book fa-lg"></i>下書きに戻す
+  <% end %></p>
+
+  <p><%= button_to normal_tickets_path, method: :get, class: 'btn btn-info' do %>
+    <i class="fa fa-clone fa-lg"></i>チケット一覧
+  <% end %></p>
+<% end %>
