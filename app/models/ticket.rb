@@ -3,6 +3,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :ballpark
   belongs_to :visitor, class_name: 'Team'
   belongs_to :home, class_name: 'Team'
+  has_many   :notifications, dependent: :destroy
 
   validates :playball,    presence: true
   validates :user_id,     presence: true

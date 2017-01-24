@@ -1,6 +1,6 @@
 <h2 class="page-header">チケット一覧</h2>
 
-<table class="table table-striped">
+<table class="type08">
   <thead>
     <tr>
       <th>PLAYBALL</th>
@@ -29,7 +29,7 @@
         <td><%= link_to normal_ticket_path(ticket) do %>
               <i class="fa fa-book fa-lg"></i>
             <% end %></td>
-        <td><%= ticket_status(ticket) unless current_user == ticket.user %></td>
+        <td><%= ticket_status(ticket) %></td>
       </tr>
     <% end %>
   </tbody>

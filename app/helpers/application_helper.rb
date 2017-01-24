@@ -16,6 +16,8 @@ module ApplicationHelper
       if ticket.offer_users.present?
         '抽選中'
       end
+    elsif ticket.user == current_user
+      'My Ticket'
     else
       if current_user.offers.find_by(ticket_id: ticket.id).present?
         button_to '申し込み', normal_ticket_offer_path(ticket_id: ticket.id, id: current_user.offers.find_by(ticket_id: ticket.id)), method: :delete, class: 'btn btn-danger'
