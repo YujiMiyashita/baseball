@@ -15,7 +15,7 @@ module ApplicationHelper
     if ticket.user == current_user
       'My Ticket'
     else
-      if ticket.post_end_at <= Date.yesterday
+      if Date.today < ticket.post_end_at
         if current_user.offers.find_by(ticket_id: ticket.id).present?
           button_to '申し込み', normal_ticket_offer_path(ticket_id: ticket.id, id: current_user.offers.find_by(ticket_id: ticket.id)), method: :delete, class: 'btn btn-danger'
         else

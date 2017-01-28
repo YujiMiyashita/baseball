@@ -1,27 +1,25 @@
+<h3 class="page-header"><%= @profile.nick_name %> <%= profile_img(@profile) %></h3>
+
+<div class="col-md-3 col-xs-12">
 <ul class="media-list">
 	<li class="media">
 		<div class="media-body">
-			<h3 class="page-header"><%= @profile.nick_name %> <%= profile_img(@profile) %></h3>
-      <div class="panel panel-default">
+      <div class="panel panel-success">
       	<div class="panel-heading">
       		好きな球団
       	</div>
       	<div class="panel-body">
       		<%= @profile.team.try(:name) %>
       	</div>
-      </div>
 
-      <div class="panel panel-default">
-      	<div class="panel-heading">
+				<div class="panel-heading">
       		好きな選手
       	</div>
       	<div class="panel-body">
       		<%= @profile.player.try(:name) %>
       	</div>
-      </div>
 
-      <div class="panel panel-default">
-      	<div class="panel-heading">
+				<div class="panel-heading">
       		よく行く球場
       	</div>
       	<div class="panel-body">
@@ -31,14 +29,18 @@
 		</div>
 	</li>
 </ul>
+</div>
 
-<div class="well"><%= simple_format(@profile.content) %></div>
+<div class="col-md-9 col-xs-12">
+	<div class="well"><%= simple_format(@profile.content) %></div>
+	<%= link_to '<i class="fa fa-cog fa-lg">プロフィール編集</i>'.html_safe, edit_normal_profile_path if @profile.user == current_user %>
+</div>
+
 
 <% if @profile.user == current_user %>
-  <%= link_to edit_normal_profile_path do %>
-		<i class="fa fa-cog fa-lg">プロフィール編集</i>
-	<% end %>
+<div class="col-md-12 col-xs-12">
   <%= render 'normal/users/notification_index', notifications: @notifications %>
   <%= render 'normal/group_talks/index', group_talks: @group_talks %>
 	<%= render 'normal/users/favorite_blogs', favorite_blogs: @favorite_blogs %>
+</div>
 <% end %>
