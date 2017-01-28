@@ -1,5 +1,13 @@
 <h2 class="page-header">チケット一覧</h2>
 
+<%= link_to new_normal_ticket_path do %>
+  <i class="fa fa-search fa-lg"></i>登録する
+<% end %>
+
+<%= link_to draft_index_normal_tickets_path do %>
+  <i class="fa fa-book fa-lg"></i>下書き一覧
+<% end %>
+
 <table class="type08">
   <thead>
     <tr>
@@ -35,10 +43,4 @@
   </tbody>
 </table>
 
-<%= link_to new_normal_ticket_path do %>
-  <i class="fa fa-search fa-lg"></i>登録する
-<% end %>
-
-<%= link_to draft_index_normal_tickets_path do %>
-  <i class="fa fa-book fa-lg"></i>下書き一覧
-<% end %>
+<%= paginate @tickets %>
