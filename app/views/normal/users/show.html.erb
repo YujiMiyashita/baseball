@@ -38,9 +38,13 @@
 
 
 <% if @profile.user == current_user %>
-<div class="col-md-12 col-xs-12">
-  <%= render 'normal/users/notification_index', notifications: @notifications %>
-  <%= render 'normal/group_talks/index', group_talks: @group_talks %>
-	<%= render 'normal/users/favorite_blogs', favorite_blogs: @favorite_blogs %>
-</div>
+	<div class="col-md-6 col-xs-12">
+	  <%= render 'normal/users/notification_index', notifications: @notifications %>
+	</div>
+	<div class="col-md-6 col-xs-12">
+	  <%= render 'normal/group_talks/index', group_talks: @group_talks %>
+	</div>
+	<div class="col-md-12 col-xs-12">
+		<%= render 'normal/users/favorite_blogs', favorite_blogs: @favorite_blogs %>
+	</div>
 <% end %>
