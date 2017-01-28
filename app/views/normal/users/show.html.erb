@@ -1,6 +1,6 @@
 <h3 class="page-header"><%= @profile.nick_name %> <%= profile_img(@profile) %></h3>
 
-<div class="col-md-3 col-xs-12">
+<div class="col-md-7 col-xs-12">
 <ul class="media-list">
 	<li class="media">
 		<div class="media-body">
@@ -31,7 +31,7 @@
 </ul>
 </div>
 
-<div class="col-md-9 col-xs-12">
+<div class="col-md-5 col-xs-12">
 	<div class="well"><%= simple_format(@profile.content) %></div>
 	<%= link_to '<i class="fa fa-cog fa-lg">プロフィール編集</i>'.html_safe, edit_normal_profile_path if @profile.user == current_user %>
 </div>
