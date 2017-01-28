@@ -14,6 +14,8 @@ class Ticket < ActiveRecord::Base
   validates :post_end_at, presence: true
   validates :status,      presence: true
 
+  paginates_per 5
+
   has_many :reverse_offers, class_name: 'Offer', foreign_key: 'ticket_id', dependent: :destroy
   has_many :offer_users, through: :reverse_offers, source: :user
 
