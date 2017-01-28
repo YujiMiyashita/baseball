@@ -5,7 +5,7 @@ class Normal::TicketsController < NormalController
   before_action :except_other_ticket, only: [:draft, :edit, :draft_edit, :update, :destroy]
 
   def index
-    @tickets = Ticket.index_all.where(status: 1)
+    @tickets = Ticket.index_all.where(status: 1).page(params[:page])
   end
 
   def draft_index
